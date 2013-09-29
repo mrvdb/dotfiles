@@ -10,6 +10,7 @@
 theme = {}
 theme.confdir       = awful.util.getdir("config") .. "/themes/zenburn/"
 theme.wallpaper_cmd = { "awsetbg /home/mrb/.config/awesome/themes/zenburn/zenburn-background.png" }
+theme.wallpaper = "/home/mrb/.config/awesome/themes/zenburn/zenburn-background.png"
 -- }}}
 
 -- {{{ Styles
@@ -25,7 +26,7 @@ theme.bg_urgent = "#3F3F3F"
 -- }}}
 
 -- Borders
-theme.border_width  = "1"
+theme.border_width  = "2"
 theme.border_normal = "#3F3F3F"
 theme.border_focus = "#ff4500"
 theme.border_marked = "#CC9393"
