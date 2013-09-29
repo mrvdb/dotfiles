@@ -6,20 +6,35 @@ awful.autofocus = require("awful.autofocus")
 
 -- Widget and layout library
 wibox = require("wibox")
--- Theme handling library
-beautiful = require("beautiful")
 -- Notification library
 naughty = require("naughty")
 menubar = require("menubar")
 
--- {{{ Variable definitions
+local vicious = require("vicious")
+local vicious_contrib = require("vicious.contrib")
+
 -- Themes define colours, icons, and wallpapers
+beautiful = require("beautiful")
 beautiful.init("/home/mrb/.config/awesome/themes/zenburn/theme.lua")
 -- Wallpaper
 if beautiful.wallpaper then
     for s = 1, screen.count() do
         gears.wallpaper.maximized(beautiful.wallpaper, s, true)
     end
+end
+
+-- The systray is a bit complex. We need to configure it to display
+-- the right colors. Here is a link with more background about this:
+-- http://thread.gmane.org/gmane.comp.window-managers.awesome/9028
+xprop = assert(io.popen("xprop -root _NET_SUPPORTING_WM_CHECK"))
+wid = xprop:read():match("^_NET_SUPPORTING_WM_CHECK.WINDOW.: window id # (0x[%S]+)$")
+xprop:close()
+if wid then
+   wid = tonumber(wid) + 1
+   os.execute("xprop -id " .. wid ..
+		 " -format _NET_SYSTEM_TRAY_COLORS 32c " ..
+		 "-set _NET_SYSTEM_TRAY_COLORS " ..
+		 "56320,56320,52224,65535,8670,8670,65535,32385,0,8670,65535,8670")
 end
 
 -- Environment settings
@@ -61,29 +76,35 @@ clientkeys    = {}
 clientbuttons = {}
 local bindings = require("bindings")
 
--- Notification library
+-- Notification library settings
 local notifications = require('notifications')
 
--- {{{ Menu
--- Create a laucher widget and a main menu
-myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", awesome.quit }
-}
+--
+-- Prepare components for the wibox
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
-                                  }
-                        })
+-- separator image
+-- FIXME: does not work since 3.5.1
+separator = wibox.widget.imagebox()
+separator.set_image = beautiful.widget_sep
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
 
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
+-- CPU usage
+cpuicon = wibox.widget.imagebox()
+cpuicon.image = beautiful.widget_cpu
+cpugraph = awful.widget.graph()
+cpugraph:set_width(40):set_height(14)
+cpugraph:set_background_color(beautiful.fg_off_widget)
+
+cpugraph:set_color({  type = "linear",
+		      from = { 0, 0 }, to = { 0, 20 },
+		      stops = {
+			 { 0, beautiful.fg_end_widget },
+			 { 0.5,beautiful.fg_center_widget },
+			 { 1, beautiful.fg_widget }
+		      }
+		   }
+)
+vicious.register(cpugraph,  vicious.widgets.cpu,      "$1")
 
 -- {{{ Wibox
 -- Create a textclock widget
@@ -95,16 +116,16 @@ mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
-                    awful.button({ }, 1, awful.tag.viewonly),
-                    awful.button({ Cmd }, 1, awful.client.movetotag),
-                    awful.button({ }, 3, awful.tag.viewtoggle),
-                    awful.button({ Cmd }, 3, awful.client.toggletag),
-                    awful.button({ }, 4, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
-                    awful.button({ }, 5, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
+                    awful.button({ }, LeftButton, awful.tag.viewonly),
+                    awful.button({ Cmd }, LeftButton, awful.client.movetotag),
+                    awful.button({ }, RightButton, awful.tag.viewtoggle),
+                    awful.button({ Cmd }, RightButton, awful.client.toggletag),
+                    awful.button({ }, ScrollUp, function(t) awful.tag.viewnext(awful.tag.getscreen(t)) end),
+                    awful.button({ }, ScrollDown, function(t) awful.tag.viewprev(awful.tag.getscreen(t)) end)
                     )
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
-                     awful.button({ }, 1, function (c)
+                     awful.button({ }, LeftButton, function (c)
                                               if c == client.focus then
                                                   c.minimized = true
                                               else
@@ -120,7 +141,7 @@ mytasklist.buttons = awful.util.table.join(
                                                   c:raise()
                                               end
                                           end),
-                     awful.button({ }, 3, function ()
+                     awful.button({ }, RightButton, function ()
                                               if instance then
                                                   instance:hide()
                                                   instance = nil
@@ -128,11 +149,11 @@ mytasklist.buttons = awful.util.table.join(
                                                   instance = awful.menu.clients({ width=250 })
                                               end
                                           end),
-                     awful.button({ }, 4, function ()
+                     awful.button({ }, ScrollUp, function ()
                                               awful.client.focus.byidx(1)
                                               if client.focus then client.focus:raise() end
                                           end),
-                     awful.button({ }, 5, function ()
+                     awful.button({ }, ScrollDown, function ()
                                               awful.client.focus.byidx(-1)
                                               if client.focus then client.focus:raise() end
                                           end))
@@ -144,28 +165,34 @@ for s = 1, screen.count() do
     -- We need one layoutbox per screen.
     mylayoutbox[s] = awful.widget.layoutbox(s)
     mylayoutbox[s]:buttons(awful.util.table.join(
-                           awful.button({ }, 1, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 3, function () awful.layout.inc(layouts, -1) end),
-                           awful.button({ }, 4, function () awful.layout.inc(layouts, 1) end),
-                           awful.button({ }, 5, function () awful.layout.inc(layouts, -1) end)))
+                           awful.button({ }, LeftButton, function () awful.layout.inc(layouts, 1) end),
+                           awful.button({ }, RightButton, function () awful.layout.inc(layouts, -1) end),
+                           awful.button({ }, ScrollUp, function () awful.layout.inc(layouts, 1) end),
+                           awful.button({ }, ScrollDown, function () awful.layout.inc(layouts, -1) end)))
     -- Create a taglist widget
     mytaglist[s] = awful.widget.taglist(s, awful.widget.taglist.filter.all, mytaglist.buttons)
 
     -- Create a tasklist widget
-    --mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
+    -- mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
     mywibox[s] = awful.wibox({ position = "top", screen = s })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(mylauncher)
+    left_layout:add(separator)
     left_layout:add(mytaglist[s])
+    left_layout:add(separator)
+
     left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
+
+    -- System tray just on the first screen
+    local st = wibox.widget.systray()
+
+    if s == 1 then right_layout:add(st) end
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
