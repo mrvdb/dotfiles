@@ -1,7 +1,7 @@
 -- Usually at the end of awesome config, a set of startup applications
 -- need to be called. They have been gathered here.
 
-require("lfs") 
+require("lfs")
 -- {{{ Run programm once
 local function processwalker()
    local function yieldprocess()
@@ -47,36 +47,41 @@ end
 -- awesome wiki page on this)
 -- We still start it for the following reasons:
 -- 1. The theme-ing is easier to manager and in sync with the "normal" gnome session;
--- → DONE: now using lxappearance to control appearance settings
--- → DONE: gnome-color-chooser has even more
 -- 2. Configured keyboard shortcuts in gnome won't work
 -- otherwise. (TODO: move them to a lower level? *sigh*)
 --    Q: can this be done with autokey which we are running for other reasons anyways
 --    A: yes
 -- → OPTION:using autokey for the global shortcuts ---> BUGGY, not suitable
 -- 3. Some Fn keys are apparently handled by gnome-settings-daemon
+-- 4. Handling the display settings with gnome control center is very comfy
+run_once("gnome-settings-daemon")
 
 -- I basically want the functionality of gnome-power manager
 -- 1. Suspend the machine after some idle time
 -- run_once("gnome-power-manager")
 
--- xbindkeys 
+-- xbindkeys
 -- TODO: this should be done automatically, but I have an environment issue.
 run_once("xbindkeys")
 
+-- xscreensaver
+run_once("xscreensaver","xscreensaver -nospslash")
+
 -- Applets
-run_once("nm-applet")			-- Network applet is a whole lot easier than doing by hand
---run_once("wpa_gui", "wpa_gui -t")               -- WPA wireless lan managing when we're playing with the bonding stuff
-run_once("bluetooth-applet")			-- Not really needed apart from signalling if it's there
-run_once("system-config-printer-applet")	-- Printer is otherwise hard to reach
-run_once("pyinputstats")			-- Keeping some stats about mouse mileage and keyclicks
+run_once("nm-applet")	         -- Network applet is a whole lot easier than doing by hand
+-- run_once("wpa_gui", "wpa_gui -t")                            -- WPA wireless lan managing when we're playing with the bonding stuff
+run_once("bluetooth-applet")					-- Not really needed apart from signalling if it's there
+run_once("gnome-sound-applet")
+run_once("system-config-printer-applet")			-- Printer is otherwise hard to reach
+-- run_once("pyinputstats")					-- Keeping some stats about mouse mileage and keyclicks
 
 -- Apps which have systray icons and should be run at startup
--- commented it out because I'm not using it anymore
--- run_once("shutter","shutter --min_at_startup")
 
 -- FIXME: since upgrading to quantal, autokey does not work anymore
 -- run_once("autokey-gtk","/usr/bin/python /usr/bin/autokey-gtk")
+
+-- Have unity-mail check the mail and notify, so we don't have to
+run_once("unity-mail")
 
 -- A less than braindead program to prevent the screensaver from running semi-automatically
 run_once("caffeine")
@@ -99,6 +104,4 @@ run_once("gdu-notification-daemon","/usr/lib/gnome-disk-utility/gdu-notification
 run_once("start-pulseaudio-x11")
 
 -- TODO: This was not in gnome, do I need this?
-run_once("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
-
-
+-- run_once("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
