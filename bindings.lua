@@ -23,19 +23,26 @@ ScrollDown  = 5
 globalkeys = awful.util.table.join(
    -- Client manipulation
    -- ⌘ → : next client
+   -- ⌘ '  : next client (so I don't have to push Fn on the HHKB)
    awful.key({Cmd,}, "Right",
    	     function ()
    		awful.client.focus.byidx( 1)
    		if client.focus then client.focus:raise() end
    	     end),
-   -- awful.key({Cmd,}, "u",
-   -- 	     function ()
-   -- 		awful.client.focus.byidx( 1)
-   -- 		if client.focus then client.focus:raise() end
-   -- 	     end),
+   awful.key({Cmd,}, "'",
+   	     function ()
+   		awful.client.focus.byidx( 1)
+   		if client.focus then client.focus:raise() end
+   	     end),
 
-   -- -- ⌘ ← previous client
+   -- ⌘ ← previous client
+   -- ⌘ ;  previous client (so I don't have to push Fn on the HHKB)
    awful.key({ Cmd,}, "Left",
+   	     function ()
+   		awful.client.focus.byidx(-1)
+   		if client.focus then client.focus:raise() end
+   	     end),
+   awful.key({ Cmd,}, ";",
    	     function ()
    		awful.client.focus.byidx(-1)
    		if client.focus then client.focus:raise() end
@@ -53,11 +60,14 @@ globalkeys = awful.util.table.join(
 	     end),
 
    -- Ctrl-⌘- ← : filters clients to the previous tag in the list
-   awful.key({ Cmd, Ctrl }, "Left",   awful.tag.viewprev       ),
-   awful.key({ Cmd, Ctrl }, "u",   awful.tag.viewprev       ),
+   -- Ctrl-⌘- ;  : filters clients to the previous tag in the list (same key, but without Fn on the HHKB)
+   awful.key({ Cmd, Ctrl }, "Left",   awful.tag.viewprev),
+   awful.key({ Cmd, Ctrl },    ";",   awful.tag.viewprev),
+
    -- Ctrl-⌘ →  :filters clients to the next tag in the list
-   awful.key({ Cmd, Ctrl }, "Right",  awful.tag.viewnext       ),
-   awful.key({ Cmd, Ctrl }, "i",  awful.tag.viewnext       ),
+   awful.key({ Cmd, Ctrl }, "Right",  awful.tag.viewnext),
+   awful.key({ Cmd, Ctrl }, "'",      awful.tag.viewnext),
+
    -- ⌘-Esc history restore? (switch back and forth between last view?)
    awful.key({ Cmd,           }, "Escape", awful.tag.history.restore),
    -- Control ⌘ w shows the main menu
