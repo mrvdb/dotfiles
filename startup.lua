@@ -60,18 +60,14 @@ run_once("gnome-settings-daemon")
 -- 1. Suspend the machine after some idle time
 -- run_once("gnome-power-manager")
 
--- xbindkeys
--- TODO: this should be done automatically, but I have an environment issue.
-run_once("xbindkeys")
-
 -- xscreensaver
-run_once("xscreensaver","xscreensaver -nospslash")
+run_once("xscreensaver","xscreensaver -nosplash")
 
 -- Applets
-run_once("nm-applet")	         -- Network applet is a whole lot easier than doing by hand
+run_once("nm-applet")	                                        -- Network applet is a whole lot easier than doing by hand
 -- run_once("wpa_gui", "wpa_gui -t")                            -- WPA wireless lan managing when we're playing with the bonding stuff
 run_once("bluetooth-applet")					-- Not really needed apart from signalling if it's there
-run_once("gnome-sound-applet")
+run_once("gnome-sound-applet")                                  -- Volume indicator mostly.
 run_once("system-config-printer-applet")			-- Printer is otherwise hard to reach
 -- run_once("pyinputstats")					-- Keeping some stats about mouse mileage and keyclicks
 
@@ -81,6 +77,8 @@ run_once("system-config-printer-applet")			-- Printer is otherwise hard to reach
 -- run_once("autokey-gtk","/usr/bin/python /usr/bin/autokey-gtk")
 
 -- Have unity-mail check the mail and notify, so we don't have to
+-- FIXME: this is not the solution I want to use, but it works for now
+-- Wanted: IMAP idle monitor with trigger to runn offlineimap
 run_once("unity-mail")
 
 -- A less than braindead program to prevent the screensaver from running semi-automatically
@@ -94,14 +92,15 @@ run_once("krb5-auth-dialog")
 
 -- This converts GConf th GSettings data, not sure if we need this,
 -- but it is no daemon and it only runs on startup, so I don't really care
-run_once("gsettings-data-convert")
+-- run_once("gsettings-data-convert")
 
 -- TODO: specify here what this does, exactly
 -- It is about disk insertion
-run_once("gdu-notification-daemon","/usr/lib/gnome-disk-utility/gdu-notification-daemon")
+-- run_once("gdu-notification-daemon","/usr/lib/gnome-disk-utility/gdu-notification-daemon")
 
 -- TODO: check if this is needed
-run_once("start-pulseaudio-x11")
+-- run_once("start-pulseaudio-x11")
 
 -- TODO: This was not in gnome, do I need this?
+-- This enables asking for passwords when needed by gnome control center
 -- run_once("/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
