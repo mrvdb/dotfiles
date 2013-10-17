@@ -45,7 +45,7 @@ awful.rules.rules = {
    { rule_any = {class = {
 		    "Bitcoin", "Totem", "pinentry", "Krb5-auth-dialog", "Gmpc",
 		    "Gtk-recordmydesktop", "Wpa_gui", "Gnuplot",
-		    "Arandr", "Linphone", "Pavucontrol", "coriander", "Coriander"}},
+		    "Arandr", "Linphone", "Pavucontrol", "coriander", "Coriander", "Assword","Gpicview"}},
         properties = { floating = true, ontop = true },
    	callback   = awful.placement.centered
    },
