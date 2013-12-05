@@ -55,3 +55,4 @@ run_once("caffeine")                                            -- Prevent scree
 run_once("gmpc","gmpc -h")                                      -- Media player to connect to an MPD installation
 run_once("krb5-auth-dialog")                                    -- Kerberos authentication applet
 run_once("/usr/lib/btsync-user/btsync-starter")                 -- Bittorrent sync, used for syncing files with mobile
+run_once("gnubiff","gnubiff --noconfigure --systemtray")        -- IMAP idle process triggers ~/bin/mailtrigger.sh to sync mail.
