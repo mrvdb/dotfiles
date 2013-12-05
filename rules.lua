@@ -54,7 +54,7 @@ awful.rules.rules = {
    { rule_any = {class = {
 		    "Bitcoin", "Totem", "pinentry", "Krb5-auth-dialog", "Gmpc",
 		    "Gtk-recordmydesktop", "Wpa_gui", "Gnuplot",
-		    "Arandr", "Linphone", "Pavucontrol", "coriander", "Coriander", "Assword","Gpicview"}},
+		    "Arandr", "Linphone", "Pavucontrol", "coriander", "Coriander", "Assword","Gpicview", "Caffeine"}},
         properties = { floating = true, ontop = true },
    	callback   = awful.placement.centered
    },
@@ -83,14 +83,15 @@ awful.rules.rules = {
    -- * capture windows
    -- * dent creation
    -- * mail composition
+   -- * edit with emacs window (textarea link to emacs)
    -- all have the 'Emacs' class, but different instances
    -- The matching uses the Lua string.match() function
-   { rule_any = { instance   = { "capture", "dent", "pump", "mailcompose", "unsent mail" }  },
+   { rule_any = { instance   = { "capture", "dent", "pump", "mailcompose", "unsent mail", "Edit_with_Emacs_FRAME" }  },
      properties  = { floating = true, ontop = true},
      callback = awful.placement.centered
    },
    -- ... and appear on every tag
-   { rule_any = { instance   = { "capture", "dent", "pump", "mailcompose", "unsent mail" } },
+   { rule_any = { instance   = { "capture", "dent", "pump", "mailcompose", "unsent mail", "Edit_with_Emacs_FRAME" } },
      callback = place_on_all_tags
    }
 }
