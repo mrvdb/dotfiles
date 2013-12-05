@@ -43,7 +43,7 @@ end
 -- We still start it for the following reasons:
 -- 1. The theme-ing is easier to manager and in sync with the "normal" gnome session;
 -- 4. Handling the display settings with gnome control center is very comfy
--- run_once("gnome-settings-daemon")
+run_once("gnome-settings-daemon")
 
 run_once("xscreensaver","xscreensaver -nosplash")               -- xscreensaver, could use a better dialog
 run_once("nm-applet")	                                        -- Network applet is a whole lot easier than doing by hand
