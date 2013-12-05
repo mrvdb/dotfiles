@@ -12,6 +12,14 @@ function place_on_all_tags(client, parent)
    client:tags({tags[1][1],tags[1][2],tags[1][3],tags[1][4],tags[1][5]})
 end
 
+-- Some convenience constants for the tags I give to workspaces
+local default = 1
+local web     = 2
+local edit    = 3
+local system  = 4
+local mail    = 5
+local contact = 6
+
 -- Specify rules for generic to more specific.
 awful.rules.rules = {
    -- All clients will match this rule, so these are the global settings.
@@ -26,14 +34,15 @@ awful.rules.rules = {
      }
    },
 
+
    -- Application to Tag placement
-   { rule = { class = "Claws-mail" },       callback = function(c) c:tags({tags[1][5]}) end},
-   { rule = { class = "Google-chrome" },    callback = function(c) c:tags({tags[1][1],tags[1][2]}) end},
-   { rule = { class = "Chromium-browser" }, callback = function(c) c:tags({tags[1][1],tags[1][2]}) end},
+   { rule = { class = "Claws-mail" },       callback = function(c) c:tags({tags[1][mail]}) end},
+   { rule = { class = "Google-chrome" },    callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
+   { rule = { class = "Chromium-browser" }, callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
    -- Seems newer chrome put this in their class
-   { rule = { class = "X-www-browser" },    callback = function(c) c:tags({tags[1][1],tags[1][2]}) end},
-   { rule = { class = "Emacs" },            callback = function(c) c:tags({tags[1][1],tags[1][3]}) end},
-   { rule = { class = "Openerp-client.py"}, callback = function(c) c:tags({tags[1][6]}) end},
+   { rule = { class = "X-www-browser" },    callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
+   { rule = { class = "Emacs" },            callback = function(c) c:tags({tags[1][default],tags[1][edit]}) end},
+   { rule = { class = "Openerp-client.py"}, callback = function(c) c:tags({tags[1][contact]}) end},
 
 
    -- Floating applications
