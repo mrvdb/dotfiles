@@ -30,7 +30,7 @@ local function run_once(process, cmd)
 
    for p in processwalker() do
       if p:find(process:gsub("[-+?*]", regex_killer)) then
-	 return
+         return
       end
    end
    return awful.util.spawn(cmd or process)
@@ -46,13 +46,13 @@ end
 run_once("gnome-settings-daemon")
 
 run_once("xscreensaver","xscreensaver -nosplash")               -- xscreensaver, could use a better dialog
-run_once("nm-applet")	                                        -- Network applet is a whole lot easier than doing by hand
--- run_once("wpa_gui", "wpa_gui -t")                            -- WPA wireless lan managing when we're playing with the bonding stuff
-run_once("blueman-applet")					-- Not really needed apart from signalling if it's there
+run_once("wicd-client")                                         -- Network management through wicd
+run_once("blueman-applet")                                      -- Not really needed apart from signalling if it's there
 run_once("gnome-sound-applet")                                  -- Volume indicator mostly.
-run_once("system-config-printer-applet")			-- Printer is otherwise hard to reach
+run_once("system-config-printer-applet")                        -- Printer is otherwise hard to reach
 run_once("caffeine")                                            -- Prevent screensaver to run is certain programs are active (vlc, youtube etc.)
 run_once("gmpc","gmpc -h")                                      -- Media player to connect to an MPD installation
 run_once("krb5-auth-dialog")                                    -- Kerberos authentication applet
 run_once("/usr/lib/btsync-user/btsync-starter")                 -- Bittorrent sync, used for syncing files with mobile
-run_once("gnubiff","gnubiff --noconfigure --systemtray")        -- IMAP idle process triggers ~/bin/mailtrigger.sh to sync mail.
+run_once("gnubiff","gnubiff -n --systemtray")                   -- IMAP idle process triggers ~/bin/mailtrigger.sh to sync mail.
+run_once("mouseserver","mouseserver")                           -- Server part for wifi mouse on android, so I can use as touchpad
