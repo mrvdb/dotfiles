@@ -6,8 +6,6 @@ awful.autofocus = require("awful.autofocus")
 
 -- Widget and layout library
 wibox = require("wibox")
--- Notification library
-naughty = require("naughty")
 menubar = require("menubar")
 
 local vicious = require("vicious")
