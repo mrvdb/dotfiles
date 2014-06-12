@@ -190,7 +190,7 @@ clientbuttons = awful.util.table.join(
 root.buttons(
    awful.util.table.join(
       -- Right click toggles the main aw menu
-      awful.button({ }, RightButton, function () mymainmenu:toggle() end),
+--      awful.button({ }, RightButton, function () mymainmenu:toggle() end),
       -- Button 4 filters clients to the next tag in the list
       awful.button({ }, ScrollUp, awful.tag.viewnext),
       -- Button 5 filters clients to the previous tag in the list
