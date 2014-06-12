@@ -62,8 +62,8 @@ layouts = {
 -- Tags use layouts, but gets used by keybindings
 -- Define a tag table which hold all screen tags.
 tagdefs = {
-   names = {"default","web","edit","system","mail","contact"},
-   layout ={layouts[1], layouts[1],layouts[1],layouts[1],layouts[1],layouts[1]}
+   names = {"default","web","edit","system","mail","contact","media"},
+   layout ={layouts[1], layouts[1],layouts[1],layouts[1],layouts[1],layouts[1],layouts[1]}
 }
 tags = {}
 for s = 1, screen.count() do
