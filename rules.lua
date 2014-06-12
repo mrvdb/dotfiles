@@ -39,25 +39,29 @@ awful.rules.rules = {
    -- Application to Tag placement
    { rule = { class = "Claws-mail" },       callback = function(c) c:tags({tags[1][mail]}) end},
    { rule = { class = "Google-chrome" },    callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
-   { rule = { class = "Chromium-browser" }, callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
+   { rule = { class = "Chrome-browser" }, callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
    -- Seems newer chrome put this in their class
+   { rule = { class = "Google-chrome-beta" },    callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
    { rule = { class = "X-www-browser" },    callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
+   { rule = { class = "Firefox" },    callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},   
    { rule = { class = "Emacs" },            callback = function(c) c:tags({tags[1][default],tags[1][edit]}) end},
    { rule = { class = "Openerp-client.py"}, callback = function(c) c:tags({tags[1][contact]}) end},
+   { rule = { class = "Virt-viewer"}, callback = function(c) c:tags({tags[1][system]}) end},
 
 
    -- Floating applications
-   { rule_any = {class = { "MPlayer", "Gimp", "Psi-plus", "psi", "Remmina"} },
+   { rule_any = {class = { "MPlayer", "Gimp", "Psi-plus", "psi", "Remmina", "Virt-viewer"} },
         properties = { floating = true }
    },
 
    -- Centered floating applications which stay on top
    { rule_any = {class = {
-		    "Bitcoin", "Totem", "pinentry", "Krb5-auth-dialog", "Gmpc",
-		    "Gtk-recordmydesktop", "Wpa_gui", "Gnuplot",
-		    "Arandr", "Linphone", "Pavucontrol", "coriander", "Coriander", "Assword","Gpicview", "Caffeine"}},
+                    "Bitcoin", "Totem", "Vlc", "pinentry", "Krb5-auth-dialog", "Gmpc",
+                    "Gtk-recordmydesktop", "Wpa_gui", "Gnuplot",
+                    "Arandr", "Linphone", "Pavucontrol", "coriander", "Coriander",
+                    "Assword","Gpicview", "Caffeine", "ArmoryQt.py", "Wicd-client.py", "Popcorn-Time"}},
         properties = { floating = true, ontop = true },
-   	callback   = awful.placement.centered
+        callback   = awful.placement.centered
    },
 
    -- Mail compose window is identified by its role property, make it
@@ -77,6 +81,7 @@ awful.rules.rules = {
 
    -- Claws-mail in its own workspace, but compose on any screen
    { rule = { role = "compose" },
+     properties = { floating = true, ontop =true },
      callback = place_on_all_tags
    },
 
@@ -87,12 +92,29 @@ awful.rules.rules = {
    -- * edit with emacs window (textarea link to emacs)
    -- all have the 'Emacs' class, but different instances
    -- The matching uses the Lua string.match() function
-   { rule_any = { instance   = { "capture", "dent", "pump", "mailcompose", "unsent mail", "Edit_with_Emacs_FRAME" }  },
+   { rule_any = { instance   = { "twister", "capture", "dent", "pump", "mailcompose", "unsent mail", "Edit_with_Emacs_FRAME" }  },
      properties  = { floating = true, ontop = true},
      callback = awful.placement.centered
    },
    -- ... and appear on every tag
-   { rule_any = { instance   = { "capture", "dent", "pump", "mailcompose", "unsent mail", "Edit_with_Emacs_FRAME" } },
+   { rule_any = { instance   = { "twister", "capture", "dent", "pump", "mailcompose", "unsent mail", "Edit_with_Emacs_FRAME" } },
      callback = place_on_all_tags
+   },
+
+   -- Dialog boxes with important messages that should never be hidden
+   -- below another window or a tag screen
+   { rule_any = { name = { "Discard message" } },
+     properties = { ontop = true },
+     callback = place_on_all_tags
+   },
+   
+
+   -- Netflix runs in firefox on wine
+   -- - want it on top
+   -- - want it initially on media tag
+   -- - want it floating too, fullscreen handling we do with the window manager
+   {  rule = { name = "Netflix - Mozilla Firefox" },
+      properties = { ontop = true, floating = true },
+      callback = function(c) c:tags({tags[1][media]}) end
    }
 }
