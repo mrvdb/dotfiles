@@ -19,18 +19,19 @@ local edit    = 3
 local system  = 4
 local mail    = 5
 local contact = 6
+local media   = 7
 
 -- Specify rules for generic to more specific.
 awful.rules.rules = {
    -- All clients will match this rule, so these are the global settings.
    { rule = { },
      properties = {
-	size_hints_honor = false, -- This removes gaps between windows
-	border_width = beautiful.border_width,
-	border_color = beautiful.border_normal,
-	focus = true,
-	keys = clientkeys,
-	buttons = clientbuttons
+        size_hints_honor = false, -- This removes gaps between windows
+        border_width = beautiful.border_width,
+        border_color = beautiful.border_normal,
+        focus = true,
+        keys = clientkeys,
+        buttons = clientbuttons
      }
    },
 
