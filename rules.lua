@@ -39,7 +39,8 @@ awful.rules.rules = {
    -- Application to Tag placement
    { rule = { class = "Claws-mail" },       callback = function(c) c:tags({tags[1][mail]}) end},
    { rule = { class = "Google-chrome" },    callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
-   { rule = { class = "Chrome-browser" }, callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
+   { rule = { class = "Chrome-browser" },   callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
+   { rule = { class = "Iceweasel" },        callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
    -- Seems newer chrome put this in their class
    { rule = { class = "Google-chrome-beta" },    callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
    { rule = { class = "X-www-browser" },    callback = function(c) c:tags({tags[1][default],tags[1][web]}) end},
