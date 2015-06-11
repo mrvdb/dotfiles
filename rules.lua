@@ -57,10 +57,10 @@ awful.rules.rules = {
 
    -- Centered floating applications which stay on top
    { rule_any = {class = {
-                    "Bitcoin", "Totem", "Vlc", "pinentry", "Krb5-auth-dialog", "Gmpc",
+                    "Bitcoin", "Vlc", "pinentry", "Gmpc", "mpv",
                     "Gtk-recordmydesktop", "Wpa_gui", "Gnuplot",
                     "Arandr", "Linphone", "Pavucontrol", "coriander", "Coriander",
-                    "Assword","Gpicview", "Caffeine", "ArmoryQt.py", "Wicd-client.py", "Popcorn-Time"}},
+                    "Gpicview", "Caffeine", "ArmoryQt.py", "Wicd-client.py", "Popcorn-Time"}},
         properties = { floating = true, ontop = true },
         callback   = awful.placement.centered
    },
@@ -117,5 +117,12 @@ awful.rules.rules = {
    {  rule = { name = "Netflix - Mozilla Firefox" },
       properties = { ontop = true, floating = true },
       callback = function(c) c:tags({tags[1][media]}) end
+   },
+
+
+   -- Dia has toolboxes, make sure they float
+   -- Size can still be very odd?
+   { rule = { role = "toolbox_window" },
+     properties = { floating = true }
    }
 }
