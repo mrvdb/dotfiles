@@ -89,34 +89,28 @@ separator.set_image = beautiful.widget_sep
 battery = wibox.widget.textbox()    
 battery:set_text(" | Battery | ")    
 batterytimer = timer({ timeout = 5 })    
-batterytimer:connect_signal("timeout",    
-  function()    
-    fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))    
-    battery:set_text(" | 🔋" .. fh:read("*l") .. " | ")    
-    fh:close()    
+batterytimer:connect_signal(
+   "timeout",
+   function()
+      local fh = assert(
+	 io.popen(
+	    "acpi -ab | cut -d: -f 2 | cut -d, -f2",
+	    "r"))
+
+      local status = fh:read("*l")
+      local icon = "🔋"
+      if string.find(fh:read("*l"),"on%-line") then
+	 icon = "🔌"
+      end
+      
+      battery:set_text(" | " .. icon .. status .. " | ")
+      fh:close()    
   end    
 )    
 batterytimer:start()
 
 -- CPU usage
-cpuicon = wibox.widget.imagebox()
-cpuicon.image = beautiful.widget_cpu
-cpugraph = awful.widget.graph()
-cpugraph:set_width(40):set_height(14)
-cpugraph:set_background_color(beautiful.fg_off_widget)
 
-cpugraph:set_color({  type = "linear",
-		      from = { 0, 0 }, to = { 0, 20 },
-		      stops = {
-			 { 0, beautiful.fg_end_widget },
-			 { 0.5,beautiful.fg_center_widget },
-			 { 1, beautiful.fg_widget }
-		      }
-		   }
-)
-vicious.register(cpugraph,  vicious.widgets.cpu,      "$1")
-
--- {{{ Wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
 
