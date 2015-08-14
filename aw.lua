@@ -85,6 +85,18 @@ local notifications = require('notifications')
 separator = wibox.widget.imagebox()
 separator.set_image = beautiful.widget_sep
 
+-- Battery
+battery = wibox.widget.textbox()    
+battery:set_text(" | Battery | ")    
+batterytimer = timer({ timeout = 5 })    
+batterytimer:connect_signal("timeout",    
+  function()    
+    fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))    
+    battery:set_text(" | 🔋" .. fh:read("*l") .. " | ")    
+    fh:close()    
+  end    
+)    
+batterytimer:start()
 
 -- CPU usage
 cpuicon = wibox.widget.imagebox()
@@ -191,6 +203,8 @@ for s = 1, screen.count() do
     local st = wibox.widget.systray()
 
     if s == 1 then right_layout:add(st) end
+
+    right_layout:add(battery)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
