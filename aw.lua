@@ -102,12 +102,12 @@ batterytimer = timer({ timeout = 5 })
 batterytimer:connect_signal(
    "timeout",
    function()
-      local status = pstat("acpi -ab | cut -d' ' -f4")
+      local status = pstat("acpi -b| cut -d' ' -f4")
       local icon = "🔋"
-      if string.find(status,"on%-line") then
+      if string.find(pstat("acpi -a| cut -d' ' -f3"),"on%-line") then
 	 icon = " 🔌"
       end
-      battery:set_text(" | " .. icon .. status .. " ") 
+      battery:set_text(" | " .. icon .. " " .. status .. " ") 
   end    
 )
 batterytimer:start()
