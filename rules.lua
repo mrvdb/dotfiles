@@ -57,7 +57,7 @@ awful.rules.rules = {
 
    -- Centered floating applications which stay on top
    { rule_any = {class = {
-                    "Bitcoin", "Vlc", "pinentry", "Gmpc", "mpv",
+                    "Bitcoin", "Vlc", "Pinentry", "Gmpc", "mpv",
                     "Gtk-recordmydesktop", "Wpa_gui", "Gnuplot",
                     "Arandr", "Linphone", "Pavucontrol", "coriander", "Coriander",
                     "Gpicview", "Caffeine", "ArmoryQt.py", "Wicd-client.py", "Popcorn-Time"}},
@@ -110,13 +110,9 @@ awful.rules.rules = {
    },
    
 
-   -- Netflix runs in firefox on wine
-   -- - want it on top
-   -- - want it initially on media tag
-   -- - want it floating too, fullscreen handling we do with the window manager
-   {  rule = { name = "Netflix - Mozilla Firefox" },
+   -- Experimental builds of popcorn have no class???
+   {  rule = { name = "Popcorn Time" },
       properties = { ontop = true, floating = true },
-      callback = function(c) c:tags({tags[1][media]}) end
    },
 
 
@@ -124,5 +120,13 @@ awful.rules.rules = {
    -- Size can still be very odd?
    { rule = { role = "toolbox_window" },
      properties = { floating = true }
+   },
+
+   -- I can't get the bt747 to match on its class, so we do it by name
+   -- We place it centered as that seems to have a positive
+   -- side-effect that the menu focus is proper
+   { rule = { name = "BT747 Application V2.1.3" },
+     properties = { floating = true },
+     callback = awful.placement.centered
    }
 }
