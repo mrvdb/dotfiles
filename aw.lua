@@ -102,7 +102,7 @@ batterytimer = timer({ timeout = 5 })
 batterytimer:connect_signal(
    "timeout",
    function()
-      local status = pstat("acpi -ab | cut -d: -f 2 | cut -d, -f2")
+      local status = pstat("acpi -ab | cut -d' ' -f4")
       local icon = "🔋"
       if string.find(status,"on%-line") then
 	 icon = " 🔌"
