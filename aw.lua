@@ -85,34 +85,54 @@ local notifications = require('notifications')
 separator = wibox.widget.imagebox()
 separator.set_image = beautiful.widget_sep
 
+-- Get something from the output of a process
+local function pstat(cl)
+   assert(type(cl) == "string")
+   -- Get a status by running a command line
+   local fh = io.popen(cl, "r") 
+   local status = fh:read("*l")
+   fh:close()
+   return status
+end
+
 -- Battery
 battery = wibox.widget.textbox()    
-battery:set_text(" | Battery | ")    
-batterytimer = timer({ timeout = 5 })    
+battery:set_text(" | Battery ")
+batterytimer = timer({ timeout = 5 })
 batterytimer:connect_signal(
    "timeout",
    function()
-      local fh = assert(
-	 io.popen(
-	    "acpi -ab | cut -d: -f 2 | cut -d, -f2",
-	    "r"))
-
-      local status = fh:read("*l")
+      local status = pstat("acpi -ab | cut -d: -f 2 | cut -d, -f2")
       local icon = "🔋"
-      if string.find(fh:read("*l"),"on%-line") then
-	 icon = "🔌"
+      if string.find(status,"on%-line") then
+	 icon = " 🔌"
       end
-      
-      battery:set_text(" | " .. icon .. status .. " | ")
-      fh:close()    
+      battery:set_text(" | " .. icon .. status .. " ") 
   end    
-)    
+)
 batterytimer:start()
 
--- CPU usage
+-- Similarly CPU temp
+temperature = wibox.widget.textbox()
+temperature:set_text(" | Temperature | ")
+temperaturetimer = timer({ timeout = 5 })
+temperaturetimer:connect_signal (
+   "timeout",
+   function()
+      local status = pstat("acpi -t | cut -d' ' -f4")
+      
+      local icon = "🌡"
+      local color=theme.fg_normal
+      if (tonumber(status) > 80) then
+	 color=theme.fg_urgent
+      end
+      temperature:set_markup(" | " .. icon .. '<span color="'..color..'">'.. status .. "°C</span> | ")
+   end
+)
+temperaturetimer:start()
 
 -- Create a textclock widget
-mytextclock = awful.widget.textclock()
+clock = awful.widget.textclock()
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -199,7 +219,8 @@ for s = 1, screen.count() do
     if s == 1 then right_layout:add(st) end
 
     right_layout:add(battery)
-    right_layout:add(mytextclock)
+    right_layout:add(temperature)
+    right_layout:add(clock)
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
