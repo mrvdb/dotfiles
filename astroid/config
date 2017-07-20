@@ -107,8 +107,8 @@
             "save_sent": "true",
             "save_sent_to": "\/home\/mrb\/Maildir\/Sent\/cur\/",
             "additional_sent_tags": "",
-            "save_drafts_to": "\/home\/mrb\/Maildir\/Drafts\/",
-            "signature_file": "~\/.signature",
+            "save_drafts_to": "\/home\/mrb\/Maildir\/Drafts\/", 
+            "signature_file": "\/home\/mrb\/.signature",
             "signature_default_on": "true",
             "signature_attach": "false"
         }
