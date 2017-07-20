@@ -115,8 +115,9 @@
     },
     "startup": {
         "queries": {
-            "inbox": "tag:unread",
-	    "flagged": "tag:flagged"
+            "INBOX"  : "tag:unread",
+	    "Flagged": "tag:flagged",
+	    "Drafts" : "tag:draft"
         }
     }
 }
