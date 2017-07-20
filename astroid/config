@@ -100,7 +100,7 @@
         "marcel": {
             "name": "Marcel van der Boom",
             "email": "marcel@hsdev.com",
-            "gpgkey": "",
+            "gpgkey": "0x235E5C8CF5E8DFFB",
             "always_gpg_sign": "false",
             "sendmail": "sendmail -i -t",
             "default": "true",
