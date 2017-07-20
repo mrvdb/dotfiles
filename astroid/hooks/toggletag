@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#
+# %1 : tag
+# %2 : 'thread' or 'id'
+# %3 : when viewing a thread: thread_id
+#      when viewing a message: message id
+
+
+
+if [[ $(notmuch search $2 and tag:$1) ]]; then # check if the message matches the tag
+  echo "removing tag: $1 from $2"              # 
+  notmuch tag -$1 $2                           # remove the tag
+else
+  echo "adding tag: $1 to $2"                  #
+  notmuch tag +$1 $2                           # add the tag
+fi
