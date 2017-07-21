@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Hook invoked by the insert command after message has been delivered, intial tags have
+# been applied.
+
+echo "Post-insert hook..."

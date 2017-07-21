@@ -1,0 +1,15 @@
+# What to do with mail that is incoming
+# Messages have just been fetched by mbsync and notmuch new has run
+# Initials tags are in place (i.e. new;unread by default)
+# Basically we want to replicate sieve here, if not already taken care
+# of automatically.
+
+# Everything in folder Junk is spam
++spam -unread -new -inbox  folder:Junk
+
+# Things that are in Trash folder need specific tags
++deleted -unread -new -inbox folder:Trash
+
+# Clear things that are deleted, but not everything.
+# Just a convenience as these get physically deleted at some point anyway.
+-new -unread -inbox tag:deleted

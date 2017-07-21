@@ -1,0 +1,25 @@
+#!/bin/sh
+# Adapted from some script on github, forgot which one exactly
+# What to notify
+Q="tag:new and tag:unread"
+N=5
+ICON='/usr/share/icons/Faenza/apps/48/internet-mail.png'
+
+# the sort order of subjects
+SORT="newest-first"
+
+# have notmuch count the number of messages in the search
+CNT=$(notmuch count --output=messages "$Q")
+if [ "$CNT" -gt 0 ]; then
+  # have notmuch pull the specified number of mail subjects from the search.
+  # also, do some rough formatting of the result, to pull thread string,
+  # sender etc. leaving just the subject text.
+  TXT_SUBS=$(notmuch search --format=text --output=summary --limit="$N" --sort="$SORT" "$Q" | sed 's/^[^;]*; //' | sed 's/$/\n'/)
+  # special characters like @, &, (, ), etc. break notify-send
+  # however it likes HTML encoding just fine, so use recode.
+  HTML_SUBS=$(echo "$TXT_SUBS" | recode UTF-8..html)
+
+  notify-send -i "$ICON" "$CNT unread mesages." "$HTML_SUBS"
+fi
+
+exit 0

@@ -3,7 +3,7 @@
 # Astroid poll script
 # runs at interval under astroids control
 # or manually
-HOOKDIR=$HOME/Maildir/.notmuch/hooks
+HOOKS=$HOME/.config/notmuch/hooks
 
 # What I want:
 # - do a very quick sync
@@ -13,5 +13,5 @@ HOOKDIR=$HOME/Maildir/.notmuch/hooks
 mbsync hsd-quick
 
 notmuch new --no-hooks
-notmuch tag --batch --input=$HOOKDIR/tag/incoming
-notifymuch
+notmuch tag --batch --input=$HOOKS/tag/incoming
+$HOOKS/notifynew

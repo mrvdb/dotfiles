@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Hook invoked by new command after messages have been imported and initial tags have been applied
+# typically used for:
+# - signal programs we're done syncing
+# - additional tagging
+echo "Post new hook..."
+
+HOOKS=$HOME/.config/notmuch/hooks
+
+# Initial tags are already in place (see config of notmuch)
+# now do additional processing
+echo "Additional tagging..."
+notmuch tag --batch --input=$HOOKS/tag/incoming
+
+# Signal astroid we're done
+if pgrep -x "astroid" > /dev/null
+then
+    echo "Detected running astroid, stop polling"
+    astroid --stop-polling
+fi
+
+# Notify
+echo "Notifying..."
+$HOOKS/notifynew

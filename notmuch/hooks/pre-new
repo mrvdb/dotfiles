@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Hook run by the new command before anything happens
+#
+# Typically used for:
+# - signal others we're going to sync
+# - run something which actually fetches the mail?
+#
+# $1
+# - empty : normal
+# - non empty: feed it into mbsync
+echo "Pre-new hook..."
+
+if pgrep -x "astroid" > /dev/null
+then
+    echo "Detected running astroid, start polling"
+    astroid --start-polling
+fi
+
+# Actually get the new stuff
+mbsync -a
+
