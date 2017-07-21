@@ -1,0 +1,10 @@
+# File to source common stuff for the hooks
+
+# Programs
+NM=/usr/bin/notmuch
+ASTROID=/usr/local/bin/astroid
+MB=/usr/local/bin/mbsync
+
+# Variables
+HOOKS=$HOME/.config/notmuch/hooks
+MAILDIR=/media/data/mail
