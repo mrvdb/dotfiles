@@ -5,11 +5,15 @@
 # of automatically.
 
 # Everything in folder Junk is spam
-+spam -unread -new -inbox  folder:Junk
++spam -unread -new -inbox      folder:Junk
 
 # Things that are in Trash folder need specific tags
-+deleted -unread -new -inbox folder:Trash
++deleted -unread -new -inbox   folder:Trash
 
 # Clear things that are deleted, but not everything.
 # Just a convenience as these get physically deleted at some point anyway.
--new -unread -inbox tag:deleted
+# Anything that has the spam tag (not the header, this tag was
+# assigned by us!!) is not 'new' and 'unread' anymore
+# TODO: if not in folder:Junk they should be moved to Learn/Spam (and be removed by server)
+# TODO: tag:deleted should be moved to Trash where they can retire
+-new -unread -inbox            (tag:deleted or tag:spam)

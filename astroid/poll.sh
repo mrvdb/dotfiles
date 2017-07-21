@@ -14,4 +14,7 @@ mbsync hsd-quick
 
 notmuch new --no-hooks
 notmuch tag --batch --input=$HOOKS/tag/incoming
-$HOOKS/notifynew
+
+# Do we need to notify here? I'm just going to plan to use this
+# manually, so it's likely I'm already looking at the index
+# $HOOKS/notifynew
