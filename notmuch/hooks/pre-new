@@ -14,7 +14,7 @@ echo "Pre-new hook..."
 if pgrep -x "astroid" > /dev/null
 then
     echo "Detected running astroid, start polling"
-    astroid --start-polling
+    /usr/local/bin/astroid --start-polling
 fi
 
 # Actually get the new stuff

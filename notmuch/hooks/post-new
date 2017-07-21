@@ -17,7 +17,7 @@ notmuch tag --batch --input=$HOOKS/tag/incoming
 if pgrep -x "astroid" > /dev/null
 then
     echo "Detected running astroid, stop polling"
-    astroid --stop-polling
+    /usr/local/bin/astroid --stop-polling
 fi
 
 # Notify
