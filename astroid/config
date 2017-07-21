@@ -49,7 +49,7 @@
     "mail": {
         "reply": {
             "quote_line": "Excerpts from %1's message of %2:",
-            "mailinglist_reply_to_sender": "true"
+            "mailinglist_reply_to_sender": "false"
         },
         "forward": {
             "quote_line": "Forwarding %1's message of %2:",
