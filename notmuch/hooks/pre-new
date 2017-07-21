@@ -23,3 +23,7 @@ $MB -a
 # Move deleted items to Trash
 echo "Moving deleted items to Trash..."
 $HOOKS/movetotrash
+
+# Move spams which are not Junk already to Learn
+echo "Learning new spam..."
+$HOOKS/learnspam

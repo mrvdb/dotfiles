@@ -3,5 +3,5 @@
 # I'm using the alternative uid map which seems more resistant to moving than the native
 source $HOME/.config/notmuch/hooks/common
 
-# Move deleted messages to the Trash folder
-$NM search --output=files 'tag:deleted and not folder:Trash' | xargs -n1 -i{} mv -f "{}" $MAILDIR/Trash/cur/
+# Move spam classifieds to learn
+$NM search --output=files 'tag:spam and not folder:Junk and not folder:Learn/Spam' | xargs -n1 -i{} mv -f "{}" $MAILDIR/Learn/Spam/cur/
