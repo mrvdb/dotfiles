@@ -39,12 +39,12 @@
         }
     },
     "editor": {
-        "cmd": "emacsclient -q -c --parent-id %3 %1",
+        "cmd": "emacsclient --quiet --create-frame --parent-id %3 %1",
         "external_editor": "false",
         "charset": "utf-8",
         "save_draft_on_force_quit": "true",
         "attachment_words": "attach",
-        "attachment_directory": "~"
+        "attachment_directory": "~\/Downloads"
     },
     "mail": {
         "reply": {
