@@ -1,0 +1,55 @@
+# mbsync configuration
+#
+# Concept:
+# - imap server holds the long term reference data
+# - local is maildir so it's the fastest and clients will not have to know server specifics
+#
+# Other tools involved in the setup:
+# - notmuch for indexing and simple client in emacs
+# - gnus, the long term goal client in emacs
+# - systemd for running mbsync periodically
+
+
+# Defaults
+# Keep state files close
+Syncstate *
+# TODO: check   
+CopyArrivalDate yes
+
+# Accounts
+IMAPAccount hsd
+  Host mail.hsdev.com
+  User mrb
+  # Get password from my password store
+  # FIXME: this ask for yubikey pin, but we do not realize it comes from mbsync
+  PassCmd "pass show IMAP/mail.hsdev.com"
+
+# Stores
+IMAPStore hsd
+  Account hsd
+
+MaildirStore t510
+  Path ~/Maildir/
+  SubFolders Verbatim
+  # Make sure we store stuff not in the main Maildir directory, so other
+  # tools can make subfolders if they need to, like notmuch
+  Inbox ~/Maildir/INBOX
+  AltMap yes
+  
+# Channels
+# Sync everything
+Channel hsd
+  Master :hsd:
+  Slave  :t510:
+  Patterns INBOX *
+  Create Both
+  Remove Both
+  Expunge Both
+  Sync All
+
+# Just pull in new messages in INBOX
+Channel hsd-quick
+  Master :hsd:
+  Slave :t510:
+  Patterns INBOX
+  Sync Pull New Flags
