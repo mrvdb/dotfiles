@@ -70,8 +70,8 @@
     "thread_view": {
         "open_html_part_external": "false",
         "open_external_link": "xdg-open",
-        "default_save_directory": "~",
-        "indent_messages": "false",
+        "default_save_directory": "~/Downloads",
+        "indent_messages": "true",
         "code_prettify": {
             "enable": "true",
             "for_tags": "",
