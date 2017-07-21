@@ -50,7 +50,7 @@ other_email=mrb@hsdev.com;m@rcel.hsdev.com;mvanderboom@gmail.com;
 [new]
 # Keep this in sync with the notifier
 tags=unread;new
-ignore=.mbsyncstate;.uidvalidity;marks;nov;.nnmaildir
+ignore=.isyncuidmap.db;.mbsyncstate;.uidvalidity;marks;nov;.nnmaildir
 
 
 # Search configuration
