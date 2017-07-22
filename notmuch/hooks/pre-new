@@ -14,7 +14,7 @@ source $HOME/.config/notmuch/hooks/common
 if pgrep -x "astroid" > /dev/null
 then
     echo "Detected running astroid, start polling"
-    $ASTROID --start-polling
+    $AS --start-polling
 fi
 
 # Actually get the new stuff

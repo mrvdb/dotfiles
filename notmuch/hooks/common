@@ -2,8 +2,9 @@
 
 # Programs
 NM=/usr/bin/notmuch
-ASTROID=/usr/local/bin/astroid
+AS=/usr/local/bin/astroid
 MB=/usr/local/bin/mbsync
+AF=/usr/bin/afew
 
 # Variables
 HOOKS=$HOME/.config/notmuch/hooks

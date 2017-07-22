@@ -14,13 +14,13 @@ $NM tag --batch --input=$HOOKS/tag/incoming
 
 # Run afew for advanced processing
 echo "Running afew for advanced processing..."
-afew --new --tag
+$AF --new --tag --verbose
 
 # Signal astroid we're done
 if pgrep -x "astroid" > /dev/null
 then
     echo "Detected running astroid, stop polling"
-    $ASTROID --stop-polling
+    $AS --stop-polling
 fi
 
 # Notify
