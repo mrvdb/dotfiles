@@ -31,7 +31,7 @@ path=/home/mrb/Maildir
 [user]
 name=Marcel van der Boom
 primary_email=marcel@hsdev.com
-other_email=mrb@hsdev.com;m@rcel.hsdev.com;mvanderboom@gmail.com;
+other_email=mrb@hsdev.com;m@rcel.hsdev.com;mvanderboom@gmail.com;marcel@harley.nl;beheer@hsdev.com
 
 # Configuration for "notmuch new"
 #

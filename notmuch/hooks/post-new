@@ -12,6 +12,10 @@ source $HOME/.config/notmuch/hooks/common
 echo "Additional tagging..."
 $NM tag --batch --input=$HOOKS/tag/incoming
 
+# Run afew for advanced processing
+echo "Running afew for advanced processing..."
+afew --new --tag
+
 # Signal astroid we're done
 if pgrep -x "astroid" > /dev/null
 then

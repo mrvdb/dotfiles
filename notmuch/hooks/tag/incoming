@@ -12,12 +12,8 @@
 
 # Clear things that are deleted, but not everything.
 # Just a convenience as these get physically deleted at some point anyway.
+# (see pre-new hook)
 # Anything that has the spam tag (not the header, this tag was
 # assigned by us!!) is not 'new' and 'unread' anymore
-# TODO: if not in folder:Junk they should be moved to Learn/Spam (and be removed by server)
-# TODO: tag:deleted should be moved to Trash where they can retire
 -new -unread -inbox            (tag:deleted or tag:spam)
 
-
-# Make sure that stuff from me gets a sent tag (mostly needed for messages not sent through astroid)
-+sent  (from:marcel@hsdev.com or from:mrb@hsdev.com or from marcel@harley.nl) and not tag:sent
