@@ -4,4 +4,4 @@
 source $HOME/.config/notmuch/hooks/common
 
 # Move deleted messages to the Trash folder
-$NM search --output=files 'tag:deleted and not folder:Trash' | xargs -n1 -i{} mv -f "{}" $MAILDIR/Trash/cur/
+$NM search --output=files 'tag:deleted and not tag:flagged and not folder:Trash' | xargs -n1 -i{} mv -f "{}" $MAILDIR/Trash/cur/
