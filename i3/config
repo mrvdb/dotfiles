@@ -1,0 +1,290 @@
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# TODO: get as much as possible from .Xdefaults
+# as of git rev 47562b4 in i3 repo this is possible
+# explicit: set_from_resource $black i3wm.color0 #000000
+# implicit: use $i3wm.color0 when *color0 or i3wm.color0 is set in .Xdefaults/.Xresources
+
+# Generic layout and settings
+# Font used for title bars etc. when applicable, typically a bit smaller
+# then the content font
+font pango:DejaVu Sans Mono 10 
+
+# class			border	backgr. text	indicator
+client.focused		#459900 #2e8b57 #ffffff #ff4500
+client.focused_inactive #333333 #5f676a #ffffff #484e50
+client.unfocused	#333333 #222222 #888888 #292d2e
+client.urgent		#2f343a #900000 #ffffff #900000
+client.placeholder	#000000 #0c0c0c #ffffff #000000
+client.background	#ffffff
+
+# statusbar
+# FIXME: $i3wm.foreground does not work anymore
+set $statusbar_foreground $i3wm.foreground
+set $statusbar_foreground "#dcdccc"
+set $statusbar_background "#3F3F3F"
+
+# Generic window style config
+new_window pixel 3px
+new_float normal
+hide_edge_borders none
+
+# Make the reset of urgency hint explicit
+force_display_urgency_hint 500 ms
+
+
+#
+# Workspace configuration
+#
+# Give workspace names through variables
+set $wsmulti   Multi
+set $wsdefault Default
+set $wsweb     Web
+set $wsedit    Edit
+set $wssystem  System
+set $wsmail    Mail
+set $wscontact Contact
+set $wsmedia   Media
+set $wsreading Reading
+
+# Workspace : default|stacking|tabbed
+workspace_layout default
+# Sure, automatic back and forth sounds nice
+workspace_auto_back_and_forth yes
+
+
+#
+# Key binding configuration
+#
+# Give consistent key modifiers
+set $Cmd   Mod4
+set $Shift Shift
+set $Alt   Mod1
+set $Ctrl  Control
+
+# We do not bind starters for app here (seen bindkey)
+# but if everything goes wrong, we want to be able to
+# start a terminal, so we *do* bind that one.
+bindsym $Cmd+Return exec i3-sensible-terminal
+
+#
+# MOVING FOCUS...
+# ...of a window/container
+#
+# ...basic left/right/up/down
+bindsym $Cmd+Left focus left
+bindsym $Cmd+Down focus down
+bindsym $Cmd+Up focus up
+bindsym $Cmd+Right focus right
+# ...to the window that has an urgency hint
+bindsym $Cmd+u [urgent=latest] focus
+# ...to the last focussed workspace
+bindsym $Cmd+i workspace back_and_forth
+# ...to next workspace
+bindsym $Cmd+Tab workspace next_on_output
+# ...to the parent container
+bindsym $Cmd+p focus parent
+# ...to set of tileing or set of floating
+bindsym $Cmd+space focus mode_toggle
+
+# ...to to specific workspace
+bindsym $Cmd+1 workspace $wsdefault
+bindsym $Cmd+2 workspace $wsweb
+bindsym $Cmd+3 workspace $wsedit
+bindsym $Cmd+4 workspace $wssystem
+bindsym $Cmd+5 workspace $wsmail
+bindsym $Cmd+6 workspace $wscontact
+bindsym $Cmd+7 workspace $wsmedia
+bindsym $Cmd+8 workspace 8
+bindsym $Cmd+9 workspace 9
+bindsym $Cmd+0 workspace $wsmulti
+
+
+#
+# MOVING CONTAINERS
+#
+# ...basic left/right/up/down
+bindsym $Cmd+$Shift+Left move left
+bindsym $Cmd+$Shift+Down move down
+bindsym $Cmd+$Shift+Up move up
+bindsym $Cmd+$Shift+Right move right
+# ...to next workspace
+bindsym $Cmd+$Shift+Tab mark _moving; move container to workspace next; [con_mark="_moving"] focus; unmark _moving
+# ...to specific workspace
+bindsym $Cmd+$Shift+1 move container to workspace $wsdefault
+bindsym $Cmd+$Shift+2 move container to workspace $wsweb
+bindsym $Cmd+$Shift+3 move container to workspace $wsedit
+bindsym $Cmd+$Shift+4 move container to workspace $wssystem
+bindsym $Cmd+$Shift+5 move container to workspace $wsmail
+bindsym $Cmd+$Shift+6 move container to workspace $wscontact
+bindsym $Cmd+$Shift+7 move container to workspace $wsmedia
+bindsym $Cmd+$Shift+8 move container to workspace 8
+bindsym $Cmd+$Shift+9 move container to workspace 9
+bindsym $Cmd+$Shift+0 move container to workspace $wsmulti
+# ...to last split position (WARNING: only in gitversion)
+bindsym $Cmd+$Shift+m move window to mark lastsplit, unmark lastsplit
+# ...to back and forth position and follow it
+bindsym $Cmd+$Shift+i move container to workspace back_and_forth; workspace back_and_forth
+#
+# CHANGING LAYOUT
+#
+# ...to horizontal split
+bindsym $Cmd+$Shift+h split horizontal; mark lastsplit
+# ...to vertical split
+bindsym $Cmd+$Shift+v split vertical; mark lastsplit
+# ...to the other split
+bindsym $Cmd+$Shift+o layout toggle split
+# ...to tabbed layout
+bindsym $Cmd+$Shift+t layout tabbed
+# ...to stacked layout
+bindsym $Cmd+$Shift+s layout stacking
+# ...to fullsceen and back
+bindsym $Cmd+f fullscreen toggle
+# ...to nothing
+bindsym $Cmd+w kill
+# ..,to floating and back
+bindsym $Cmd+$Ctrl+space floating toggle
+
+
+#
+# MAKE I3
+#
+# ... reload the config file
+bindsym $Cmd+Control+c reload
+# ... restart itself
+bindsym $Cmd+Control+r restart
+# ... quit
+bindsym $Cmd+Control+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+#
+# Mouse binding configuration
+#
+# Give consistent mouse button nameing
+set $LeftBtn   button1
+set $MiddleBtn button2
+set $RightBtn  button3
+set $WheelUp   button4
+set $WheelDown button5
+
+focus_follows_mouse yes
+mouse_warping output
+
+# $Cmd button1 : move
+# #Cmd button3 : resize
+# FIXME: resize works in tiling too, but click drag does not move
+floating_modifier $Cmd
+bindsym $WheelUp nop
+bindsym $WheelDown nop
+
+#
+# Scratchpad configuration
+#
+bindsym $Cmd+$Shift+minus move scratchpad
+bindsym $Cmd+minus scratchpad show
+
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    id bar-top
+    mode dock
+    position top
+    font pango:DejaVu Sans Mono 10
+    
+    #status_command i3status
+    status_command py3status -c ~/.config/i3status/config
+    strip_workspace_numbers no
+    binding_mode_indicator yes
+    colors {
+    # Take from emacs zenburn theme
+    background $statusbar_background
+    statusline $statusbar_foreground
+
+    }
+}
+
+#
+# Workspace assignments / window rules
+#
+# Don't go overboard on assignments, it's way better to have them NOT assigned
+# fixed to workspaces  because it usually means that messages and other
+# related windows also will appear on the assigned workspace which is
+# painful
+assign [class="Thunderbird"] $wsmail
+assign [class="Astroid"] $wsmail
+
+
+# Put Windows XP machines into its own workspace
+# We can't assign on title match directly (see userguide)
+for_window [class="Virt-viewer" title="winxp.*"] move to workspace "Windows XP"
+
+# Other VMs in System
+assign [class="Virt-viewer"] $wssystem
+
+# Reading apps
+assign [class="calibre"] $wsreading
+
+# Video editting
+assign [class="Blender"]  $wsmedia
+
+# Capture windows should be floating and centered
+# they are typically short-lived
+# Floating means open on active workspace and on top
+# use xprop to get info on a window
+# class -> second part of WM_CLASS
+# window_role -> WM_WINDOW_ROLE
+# instance -> first part of WM_CLASS
+# window_type -> _NET_WM_WINDOW_TYPE
+
+# When composing or capturing, don't allow to hide
+for_window [instance="Msgcompose"] floating enable sticky enable
+for_window [window_role="compose"] floating enable stickey enable
+for_window [instance="mailcompose"] floating enable sticky enable
+for_window [instance="capture"] floating enable sticky enable
+for_window [instance="Dialog"] sticky enable
+
+for_window [instance="Ediff"] floating enable border normal
+for_window [window_role="page-info"] floating enable
+for_window [class="Wpa_gui"] floating enable
+for_window [class="Pumpa"] floating enable
+for_window [class="Calc"] floating enable
+for_window [class="Gtklp"] floating enable
+for_window [class="Zeal"] floating enable 
+for_window [class="Telegram"] floating enable
+for_window [class="Gtk-recordMyDesktop"] floating enable
+for_window [class="mpv"] floating enable border normal
+for_window [class="Vlc"] floating enable border normal
+for_window [instance="Edit_with_Emacs_FRAME"] floating enable
+for_window [class="Mist"] floating enable
+for_window [class="Linphone"] floating enable
+for_window [class="Blink"] floating enable move absolute position 2150 px 20 px resize set 400 800
+for_window [class="Yubioath"] floating enable move absolute position 2150 px 20 px resize set 400 800
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Cheese"] floating enable
+for_window [class="copay"] floating enable
+for_window [class="Corebird"] floating enable border pixel 4
+for_window [class="Pinentry"] floating enable
+
+for_window [title="Event Tester"] floating enable
+
+# FIXME: this has some side effects on other apps which I dont
+#        understand, revisit this later
+#for_window [class="Chromium"] focus child, layout tabbed, focus
+
+# This works for:
+# Thunderbird
+# ?
+for_window [window_role="Preferences"] floating enable
+
+#
+# Startup apps
+#
+# Once on start session
+exec --no-startup-id "gmpc -h"
+exec --no-startup-id xfce4-clipman
+exec --no-startup-id pasystray
+
+# Always, because the repeat settings sometimes get lost
+# script is ~/bin/kbd
+exec_always --no-startup-id kbd
+# re-apply background, monitor size/config may be different
+exec_always --no-startup-id feh --bg-scale ~/.config/i3/wallpaper.jpg
