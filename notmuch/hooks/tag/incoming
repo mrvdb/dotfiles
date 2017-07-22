@@ -18,4 +18,4 @@
 -new -unread -inbox            (tag:deleted or tag:spam)
 
 # Systems management mails
-+log from:logcheck@hawking.hsdev.com
++log from:logcheck
