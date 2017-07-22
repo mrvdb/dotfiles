@@ -181,9 +181,9 @@ thread_view.next_message_expand=C-N	# Focus next message (and expand if necessar
 thread_view.previous_message_expand=C-P	# Focus previous message (and expand if necessary), default: C-p
 thread_view.print=C-M-p			# Print focused message, default: C-P
 
-thread_view.flat=			# Toggle flat or indented view of messages, default: C-F
+thread_view.flat=C-F			# Toggle flat or indented view of messages, default: C-F
 thread_view.forward=f			# Forward current message, default: f
-thread_view.forward_attached=C-f	# Forward current message as attachment, no defaults.
+thread_view.forward_attached=C-M-f	# Forward current message as attachment, no defaults.
 thread_view.search.search_or_next=C-s	# Search for text or go to next match, default: C-f
 thread_view.forward_inline=M-f		# Forward current message inlined, no defaults.
 thread_view.mark=t			# Mark or unmark message, default: t
