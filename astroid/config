@@ -115,9 +115,9 @@
     },
     "startup": {
         "queries": {
-            "INBOX"  : "(tag:unread or tag:new or folder:INBOX) and not tag:lists",
-	    "TODO"   : "tag:flagged",
-	    "Drafts" : "tag:draft"
+            "INBOX"  : "query:INBOX",
+	    "TODO"   : "query:TODO",
+	    "Drafts" : "query:Drafts"
         }
     }
 }
