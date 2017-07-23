@@ -1,7 +1,7 @@
 # File to source common stuff for the hooks
 
 # Programs
-NM=/usr/bin/notmuch
+NM=/usr/local/bin/notmuch
 AS=/usr/local/bin/astroid
 MB=/usr/local/bin/mbsync
 AF=/usr/bin/afew
