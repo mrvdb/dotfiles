@@ -17,5 +17,5 @@
 # assigned by us!!) is not 'new' and 'unread' anymore
 -new -unread -inbox            (tag:deleted or tag:spam)
 
-# Systems management mails
-+log from:logcheck
+# Systems management log mails
++logs from:logcheck or from:root from:postgres from:fail2ban
