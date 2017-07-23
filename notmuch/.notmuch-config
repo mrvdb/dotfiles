@@ -16,7 +16,7 @@ tags=unread;new
 ignore=.isyncuidmap.db;.mbsyncstate;.uidvalidity;marks;nov;.nnmaildir
 
 [search]
-exclude_tags=deleted;spam;
+exclude_tags=deleted;spam;killed;muted;
 
 [maildir]
 synchronize_flags=true
