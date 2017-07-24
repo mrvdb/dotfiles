@@ -15,12 +15,9 @@ $NM tag --batch --input=$HOOKS/tag/incoming
 # Run afew for advanced processing
 echo "Running afew for advanced processing..."
 $AF --new --tag
-# As of notmuch 0.25 the 'lists' tag has no added value
-# because we can match on regular expressions now.
-# TODO: adapt afew instead of doing it here
-$NM tag -lists tag:lists and not folder:Lists
 # Stuff that the server thinks is a list we trust that
 $NM tag +lists folder:Lists
+# Odoo does not set its List-ID header properly
 $NM tag +lists/odoo 'folder:Lists/odoo'
 
 # Signal astroid we're done

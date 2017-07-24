@@ -3,17 +3,9 @@
 
 [KillThreadsFilter]
 
-[ListMailsFilter]
+[myListMailsFilter]
 # This does:
 # - +tag lists for anything that has a List-Id header (this I could do with tag +lists folder:Lists (and below)
-# - +tag lists/listname for the same messages
-# ...
-# [ListMailsFilter]
-#
-# [Filter.1]
-# query = from:boss@office.com
-# tags = +office
-#
 
 [SentMailsFilter]
 # This add the 'sent' tag to mails coming from my addresses as configured in notmuch
