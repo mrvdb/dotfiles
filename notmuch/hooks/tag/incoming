@@ -18,4 +18,4 @@
 -new -unread -inbox            (tag:deleted or tag:spam)
 
 # Systems management log mails
-+logs from:logcheck or from:root from:postgres from:fail2ban
++logs folder:Projects/systeembeheer
