@@ -1,7 +1,7 @@
 {
     "astroid": {
         "config": {
-            "version": "7"
+            "version": "8"
         },
         "notmuch_config": "\/home\/mrb\/.notmuch-config",
         "debug": {
@@ -110,7 +110,8 @@
             "save_drafts_to": "\/home\/mrb\/Maildir\/Drafts\/", 
             "signature_file": "\/home\/mrb\/.signature",
             "signature_default_on": "true",
-            "signature_attach": "false"
+            "signature_attach": "false",
+            "signature_separate": "true"
         }
     },
     "startup": {
