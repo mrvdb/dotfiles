@@ -1,5 +1,91 @@
 # See https://github.com/astroidmail/astroid/wiki/Customizing-key-bindings
 
+# Adjustments come first, references at end of file
+
+# Main window adjustments
+main_window.quit_ask=			# Quit astroid, default: q
+main_window.close_page=q		# Close mode (or window if other windows are open), default: C-w
+main_window.quit=C-q			# Quit astroid (without asking), default: Q
+main_window.undo=C-z			# Undo last action, default: u
+main_window.search=/			# Search, default: o
+
+# Thread index adjustments
+# Hooks in scope:
+#  - thread_index.run(hooks::cmd %1)=X
+# hooks : location relative to config dir
+# cmd   : file to run
+# %1    : thread id
+# X     : key combo to bind this to
+thread_index.run(hooks::toggletag deleted thread:%1)=Delete # Toggle 'deleted' tag
+
+thread_index.refine_query=C-/		# Refine query, default: O
+thread_index.duplicate_refine_query=M-/	# Duplicate and refine query, default: C-v
+thread_index.forward=f			# Forward last message in thread, default: f
+thread_index.multi.mark_spam=s		# Toggle spam, default: S
+
+thread_index.next_thread=C-n		# Next thread, default: j, Key(false, false, (guint) GDK_KEY_Down)
+thread_index.next_thread=j
+thread_index.next_thread=Down
+
+thread_index.previous_thread=C-p   	# Previous thread, default: k, Key(false, false, (guint) GDK_KEY_Up)
+thread_index.previous_thread=k
+thread_index.previous_thread=Up
+
+thread_index.spam=s			# Toggle 'spam' tag on thread, default: S
+thread_index.toggle_marked_all=C-a	# Toggle marked on all loaded threads, default: T
+thread_index.unread=u			# Toggle 'unread' tag on thread, default: N
+
+# Thread view adjustments
+# Hooks in scope:
+#  - thread_view.run(hooks::cmd %1 %2)=X
+# hooks : location relative to config dir
+# cmd   : file to run
+# %1    : thread id
+# %2    : message id
+# X     : key to bind to
+
+# TODO: I want this on 'k' or 'd' instead of the two-finger combo Fn-Del
+thread_view.run(hooks::toggletag deleted id:%2)=Delete # Toggle for 'deleted' tag
+thread_view.run(hooks::toggletag spam id:%2)=s         # Toggle 'spam' tag
+
+thread_view.up=C-p			# Scroll up or move focus to previous element, default: k
+thread_view.down=C-n			# Scroll down or move focus to next element, default: j
+thread_view.next_message_expand=C-N	# Focus next message (and expand if necessary), default: C-n
+thread_view.previous_message_expand=C-P	# Focus previous message (and expand if necessary), default: C-p
+thread_view.print=C-M-p			# Print focused message, default: C-P
+
+thread_view.flat=C-F			# Toggle flat or indented view of messages, default: C-F
+thread_view.forward=f			# Forward current message, default: f
+thread_view.forward_attached=C-M-f	# Forward current message as attachment, no defaults.
+thread_view.search.search_or_next=M-s	# Search for text or go to next match, default: C-f
+thread_view.forward_inline=M-f		# Forward current message inlined, no defaults.
+thread_view.mark=t			# Mark or unmark message, default: t
+thread_view.page_up=			# Page up, default: C-u, Key (true, false, (guint) GDK_KEY_Up), Key (GDK_KEY_Page_Up)
+thread_view.save=C-s			# Save attachment or message, default: s
+thread_view.multi.save=C-s		# Save marked, default: s
+thread_view.save_all_attachments=C-S	# Save all attachments, default: S
+thread_view.toggle_mark_all=C-a		# Toggle mark on all messages, default: T
+
+# Message editing
+edit_message.send=C-Return   		# Send message, default: y
+edit_message.save_draft=C-s		# Save draft, default: s
+
+edit_message.attach=a			# Attach file, default: a
+edit_message.cycle_from=f		# Cycle through From selector, default: f
+edit_message.toggle_encrypt=E		# Toggle encryption and signature, default: E
+edit_message.toggle_signature=S		# Toggle signature, default: S
+edit_message.view_raw=C-u		# View raw message, default: V
+reply.cycle_reply_to=r			# Cycle through reply selector, default: r
+reply.open_reply_to=R			# Open reply selector, default: R
+
+# Search queries
+searches.save=C-s			# Save recent query as saved search, default: s
+
+
+
+
+# REFERENCE BELOW
+
 # edit_message.cancel=C-c										# Cancel sending message (unreliable), default: C-c
 # edit_message.delete_draft=D									# Delete draft, default: D
 # edit_message.edit=Return								# Edit message in editor, default: Key (GDK_KEY_Return), Key (GDK_KEY_KP_Enter)
@@ -47,11 +133,10 @@
 # searches.page_down=J										# Page down, default: J
 # searches.page_up=										# Page up, default: K
 # searches.previous_unread=ISO_Left_Tab			# Jump to previous unread thread, default: Key (false, false, (guint) GDK_KEY_ISO_Left_Tab)
-# searches.save=s											# Save recent query as saved search, default: s
 # searches.show_all_history=!									# Show all history lines, default: !
 # thread_index.archive=a										# Toggle 'inbox' tag on thread, default: a
 # thread_index.close_pane=C-w									# Close thread view pane if open, default: C-w
-# thread_index.cycle_sort=C-s									# "Cycle through sort options: 'oldest', default: C-s
+# thread_index.cycle_sort=     									# "Cycle through sort options: 'oldest', default: C-s
 # thread_index.edit_draft=E									# Edit first message marked as draft or last message in thread as new, default: E
 # thread_index.filter=C-f										# Filter rows, default: C-f
 # thread_index.filter_clear=Escape							# Clear filter, default: Key (GDK_KEY_Escape)
@@ -73,7 +158,7 @@
 # thread_index.next_unread=Tab					# Jump to next unread thread, default: Key (GDK_KEY_Tab)
 # thread_index.open_new_window=C-Return				# Open thread in new window, default: Key (true, false, (guint) GDK_KEY_Return), Key (true, false, (guint) GDK_KEY_KP_Enter)
 # thread_index.open_paned=M-Return				# Open thread in pane, default: Key (false, true, (guint) GDK_KEY_Return), Key (false, true, (guint) GDK_KEY_KP_Enter)
-# thread_index.open_thread=Return					# Open thread, default: Key (GDK_KEY_Return), Key (GDK_KEY_KP_Enter)
+# thread_index.open_thread=Return				# Open thread, default: Key (GDK_KEY_Return), Key (GDK_KEY_KP_Enter)
 # thread_index.page_down=C-d					# Page down, default: C-d, Key (true, false, (guint) GDK_KEY_Down), Key (GDK_KEY_Page_Down)
 # thread_index.page_up=C-u					# Page up, default: C-u, Key (true, false, (guint) GDK_KEY_Up), Key (GDK_KEY_Page_Up)
 # thread_index.previous_unread=ISO_Left_Tab			# Jump to previous unread thread, default: Key (false, false, (guint) GDK_KEY_ISO_Left_Tab)
@@ -92,49 +177,48 @@
 # thread_index.toggle_marked_next=t				# Toggle mark thread and move to next, default: t
 # 								#thread_index.toggle_marked_previous=						# Toggle mark thread and move to previous, no defaults.
 # thread_view.activate=Return					# Open/expand/activate focused element, default: Key (GDK_KEY_Return), Key (GDK_KEY_KP_Enter), Key (true, false, (guint) GDK_KEY_space)
-# thread_view.archive_and_close=					# Alias for thread_view.multi_next_thread.close, no defaults.
-# thread_view.archive_then_next=					# Alias for thread_view.multi_next_thread.archive, no defaults.
+# thread_view.archive_and_close=				# Alias for thread_view.multi_next_thread.close, no defaults.
+# thread_view.archive_then_next=				# Alias for thread_view.multi_next_thread.archive, no defaults.
 # thread_view.archive_then_next_unread=				# Alias for thread_view.multi_next_thread.archive_next_unread, no defaults.
 # thread_view.archive_thread=a					# Toggle 'inbox' tag on the whole thread, default: a
-# thread_view.compose_to_sender=c					# Compose a new message to the sender of the message (or receiver if sender is you), default: c
-# thread_view.delete_attachment=d					# Delete attachment (if editing), default: d
+# thread_view.compose_to_sender=c				# Compose a new message to the sender of the message (or receiver if sender is you), default: c
+# thread_view.delete_attachment=d				# Delete attachment (if editing), default: d
 # thread_view.delete_draft=D					# Delete currently focused draft, default: D
 # thread_view.edit_draft=E					# Edit currently focused message as new or draft, default: E
 # thread_view.end=0						# Scroll to end, default: 0, Key (GDK_KEY_End)
 # thread_view.expand=e						# Toggle expand, default: e
 # thread_view.flag=*						# Toggle the 'flagged' tag on the message, default: *
 # thread_view.home=1						# Scroll home, default: 1, Key (GDK_KEY_Home)
-# thread_view.multi.save=s					# Save marked, default: s
 # thread_view.multi.toggle=t					# Toggle marked, default: t
 # thread_view.multi.yank=y					# Yank, default: y
-# thread_view.multi.yank_mids=C-y					# Yank message id's, default: C-y
+# thread_view.multi.yank_mids=C-y				# Yank message id's, default: C-y
 # thread_view.multi.yank_raw=Y					# Yank raw, default: Y
 # thread_view.multi=semicolon					# Apply action to marked threads, default: Key (GDK_KEY_semicolon)
-# thread_view.multi_next_thread.archive=a				# "Archive, default: Key ("a")
+# thread_view.multi_next_thread.archive=a			# "Archive, default: Key ("a")
 # thread_view.multi_next_thread.archive_next_unread_thread=A	# "Archive, default: Key ("A")
 # thread_view.multi_next_thread.close=x				# "Archive, defaults: Key ("x")
 # thread_view.multi_next_thread.next_thread=j			# Goto next, default: Key ("j")
 # thread_view.multi_next_thread.next_unread=Tab			# Goto next unread, default: Key (GDK_KEY_Tab)
 # thread_view.multi_next_thread.previous_thread=C-p		# Goto previous, default: Key ("k")
 # thread_view.multi_next_thread.previous_unread=ISO_Left_Tab	# Goto previous unread, default: Key (false, false, (guint) GDK_KEY_ISO_Left_Tab)
-# thread_view.multi_next_thread=:					# Open next after.., default: Key (":")
+# thread_view.multi_next_thread=:				# Open next after.., default: Key (":")
 # thread_view.next_element=C-j					# Move focus to next element, default: C-j
 # thread_view.next_message=n					# Focus next message, default: n
 # thread_view.next_thread=					# Alias for thread_view.multi_next_thread.next_thread, no defaults.
 # thread_view.next_unread=Tab					# Focus the next unread message, default: Key (GDK_KEY_Tab)
-# thread_view.next_unread_thread=					# Alias for thread_view.multi_next_thread.next_unread, no defaults.
+# thread_view.next_unread_thread=				# Alias for thread_view.multi_next_thread.next_unread, no defaults.
 # thread_view.page_down=C-d					# Page down, default: C-d, Key (true, false, (guint) GDK_KEY_Down), Key (GDK_KEY_Page_Down)
 # thread_view.previous_element=C-k				# Move focus to previous element, default: C-k
-# thread_view.previous_message=p					# Focus previous message, default: p
+# thread_view.previous_message=p				# Focus previous message, default: p
 # thread_view.previous_thread=					# Alias for thread_view.multi_next_thread.previous_thread, no defaults.
 # thread_view.previous_unread=ISO_Left_Tab			# Focus the previous unread message, default: Key (false, false, (guint) GDK_KEY_ISO_Left_Tab)
 # thread_view.previous_unread_thread=				# Alias for thread_view.multi_next_thread.previous_unread, no defaults.
 # thread_view.reply=r						# Reply to current message, default: r
-# thread_view.reply_all=G						# Reply all to current message, default: G
-# thread_view.reply_mailinglist=M					# Reply to mailinglist of current message, default: M
+# thread_view.reply_all=G					# Reply all to current message, default: G
+# thread_view.reply_mailinglist=M				# Reply to mailinglist of current message, default: M
 # thread_view.reply_sender=R					# Reply to sender of current message, default: R
 # thread_view.scroll_down=J					# Scroll down, default: J, Key (GDK_KEY_Down)
-# thread_view.scroll_up=						# Scroll up, default: K, Key (GDK_KEY_Up)
+# thread_view.scroll_up=					# Scroll up, default: K, Key (GDK_KEY_Up)
 # thread_view.search.cancel=Escape				# Cancel current search, default: GDK_KEY_Escape
 # thread_view.search.next=					# Go to next match, no defaults.
 # thread_view.search.previous=P					# Go to previous match, default: P
@@ -143,77 +227,7 @@
 # thread_view.tag_message=+					# Tag message, default: +
 # thread_view.toggle_expand_all=C-e				# Toggle expand on all messages, default: C-e
 # thread_view.toggle_unread=N					# Toggle the unread tag on the message, default: N
-# thread_view.view_raw=V						# View raw source for current message, default: V
+# thread_view.view_raw=V					# View raw source for current message, default: V
 # thread_view.yank=y						# Yank current element or message text to primary clipboard, default: y
 # thread_view.yank_mid=C-y					# Yank the Message-ID of the focused message to primary clipboard, default: C-y
-# thread_view.yank_raw=Y						# Yank raw content of current element or message to primary clipboard, default: Y
-
-
-# Main window adjustments
-main_window.quit_ask=			# Quit astroid, default: q
-main_window.close_page=q		# Close mode (or window if other windows are open), default: C-w
-main_window.quit=C-q			# Quit astroid (without asking), default: Q
-main_window.undo=C-z			# Undo last action, default: u
-main_window.search=/			# Search, default: o
-
-# Thread index adjustments
-thread_index.refine_query=C-/		# Refine query, default: O
-thread_index.duplicate_refine_query=M-/	# Duplicate and refine query, default: C-v
-thread_index.forward=f			# Forward last message in thread, default: f
-thread_index.multi.mark_spam=s		# Toggle spam, default: S
-
-thread_index.next_thread=C-n		# Next thread, default: j, Key(false, false, (guint) GDK_KEY_Down)
-thread_index.next_thread=j
-thread_index.next_thread=Down
-
-thread_index.previous_thread=C-p   	# Previous thread, default: k, Key(false, false, (guint) GDK_KEY_Up)
-thread_index.previous_thread=k
-thread_index.previous_thread=Up
-
-thread_index.spam=s			# Toggle 'spam' tag on thread, default: S
-thread_index.toggle_marked_all=C-a	# Toggle marked on all loaded threads, default: T
-thread_index.unread=u			# Toggle 'unread' tag on thread, default: N
-
-# Thread view adjustments
-thread_view.up=C-p			# Scroll up or move focus to previous element, default: k
-thread_view.down=C-n			# Scroll down or move focus to next element, default: j
-thread_view.next_message_expand=C-N	# Focus next message (and expand if necessary), default: C-n
-thread_view.previous_message_expand=C-P	# Focus previous message (and expand if necessary), default: C-p
-thread_view.print=C-M-p			# Print focused message, default: C-P
-
-thread_view.flat=C-F			# Toggle flat or indented view of messages, default: C-F
-thread_view.forward=f			# Forward current message, default: f
-thread_view.forward_attached=C-M-f	# Forward current message as attachment, no defaults.
-thread_view.search.search_or_next=C-s	# Search for text or go to next match, default: C-f
-thread_view.forward_inline=M-f		# Forward current message inlined, no defaults.
-thread_view.mark=t			# Mark or unmark message, default: t
-thread_view.page_up=			# Page up, default: C-u, Key (true, false, (guint) GDK_KEY_Up), Key (GDK_KEY_Page_Up)
-thread_view.save=S			# Save attachment or message, default: s
-thread_view.save_all_attachments=C-S	# Save all attachments, default: S
-thread_view.toggle_mark_all=C-a		# Toggle mark on all messages, default: T
-
-# Message editing
-edit_message.send=C-Return   		# Send message, default: y
-edit_message.save_draft=C-s		# Save draft, default: s
-
-edit_message.attach=a			# Attach file, default: a
-edit_message.cycle_from=f		# Cycle through From selector, default: f
-edit_message.toggle_encrypt=E		# Toggle encryption and signature, default: E
-edit_message.toggle_signature=S		# Toggle signature, default: S
-edit_message.view_raw=C-u		# View raw message, default: V
-reply.cycle_reply_to=r			# Cycle through reply selector, default: r
-reply.open_reply_to=R			# Open reply selector, default: R
-
-
-# Hooks
-# - thread_index.run(hooks::cmd %1)=X
-# thread_view.run(hooks::cmd %1 %2)=X
-# - hooks is the location relative to config dir
-# - cmd is the file to look for
-# - %1 : thread id
-# - %2 : message id
-# - X : key combo to bind this to
-
-# Mark deleted (formally a toggle, but deleted is invisible normally)
-thread_view.run(hooks::toggletag deleted id:%2)=Delete
-thread_index.run(hooks::toggletag deleted thread:%1)=Delete
+# thread_view.yank_raw=Y					# Yank raw content of current element or message to primary clipboard, default: Y
