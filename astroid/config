@@ -12,12 +12,12 @@
         }
     },
     "thread_index": {
-        "page_jump_rows": "6",
+        "page_jump_rows": "1",
         "sort_order": "newest",
         "thread_load_step": "250",
         "cell": {
-            "font_description": "default",
-            "line_spacing": "2",
+            "font_description": "monospace 10",
+            "line_spacing": "4",
             "date_length": "16",
             "message_count_length": "4",
             "authors_length": "20",
