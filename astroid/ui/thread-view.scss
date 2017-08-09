@@ -30,7 +30,7 @@
 
 /* Fonts */
 @if not(global-variable-exists(font-base-size)) {
-  $font-base-size: 16px !global;
+  $font-base-size: 12px !global;
 }
 
 @if not(global-variable-exists(font-mono)) {
@@ -42,7 +42,7 @@
 }
 
 @if not(global-variable-exists(font-family-default)) {
-  $font-family-default: $font-sans !global;
+  $font-family-default: $font-mono !global;
 }
 
 /* Colours */
@@ -328,7 +328,7 @@ hr {
 
 .email_container .header_container .preview {
     /*font-size: 8pt;*/
-    font-size: 0.8em;
+    /*font-size: 0.8em;*/
     color: #777;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -348,7 +348,7 @@ hr {
 
 .email_container .header_container .subject {
     /*font-size: 8pt;*/
-    font-size: 0.7em;
+    /* font-size: 0.7em;*/
     color: #000;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -815,7 +815,7 @@ body.nohide .email .compressed_note > span {
 
 .header {
     overflow: hidden;
-    font-size: 90%;
+    /*font-size: 90%;*/
 
     #Tags {
 	.value span {
