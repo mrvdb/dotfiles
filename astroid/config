@@ -87,7 +87,7 @@
     "crypto": {
         "gpg": {
             "path": "gpg2",
-            "always_trust": "true"
+            "always_trust": "false"
         }
     },
     "saved_searches": {
