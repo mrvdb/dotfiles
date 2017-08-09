@@ -93,7 +93,7 @@
     "saved_searches": {
         "show_on_startup": "false",
         "save_history": "true",
-        "history_lines_to_show": "15",
+        "history_lines_to_show": "-1",
         "history_lines": "1000"
     },
     "accounts": {
@@ -116,9 +116,9 @@
     },
     "startup": {
         "queries": {
-            "INBOX"  : "query:INBOX",
-	    "TODO"   : "query:TODO",
-	    "Drafts" : "query:Drafts"
+            "INBOX": "query:INBOX",
+            "TODO": "query:TODO",
+            "Drafts": "query:Drafts"
         }
     }
 }
