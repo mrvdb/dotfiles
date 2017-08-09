@@ -44,7 +44,7 @@
         "charset": "utf-8",
         "save_draft_on_force_quit": "true",
         "attachment_words": "attach",
-        "attachment_directory": "~\/Downloads"
+        "attachment_directory": "\/home\/mrb\/Downloads"
     },
     "mail": {
         "reply": {
@@ -70,7 +70,7 @@
     "thread_view": {
         "open_html_part_external": "false",
         "open_external_link": "xdg-open",
-        "default_save_directory": "~/Downloads",
+        "default_save_directory": "\/home\/mrb\/Downloads",
         "indent_messages": "true",
         "code_prettify": {
             "enable": "true",
