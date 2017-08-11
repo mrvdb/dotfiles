@@ -16,7 +16,8 @@ main_window.search=/			# Search, default: o
 # cmd   : file to run
 # %1    : thread id
 # X     : key combo to bind this to
-thread_index.run(hooks::toggletag deleted thread:%1)=Delete # Toggle 'deleted' tag
+# Toggle 'deleted' tag
+thread_index.run(hooks::toggletag deleted thread:%1)=Delete 
 
 thread_index.refine_query=C-/		# Refine query, default: O
 thread_index.duplicate_refine_query=M-/	# Duplicate and refine query, default: C-v
@@ -44,9 +45,11 @@ thread_index.unread=u			# Toggle 'unread' tag on thread, default: N
 # %2    : message id
 # X     : key to bind to
 
+# Toggle for 'deleted' tag
 # TODO: I want this on 'k' or 'd' instead of the two-finger combo Fn-Del
-thread_view.run(hooks::toggletag deleted id:%2)=Delete # Toggle for 'deleted' tag
-thread_view.run(hooks::toggletag spam id:%2)=s         # Toggle 'spam' tag
+thread_view.run(hooks::toggletag deleted id:%2)=Delete
+# Toggle 'spam' tag
+thread_view.run(hooks::toggletag spam id:%2)=s         
 
 thread_view.up=C-p			# Scroll up or move focus to previous element, default: k
 thread_view.down=C-n			# Scroll down or move focus to next element, default: j
