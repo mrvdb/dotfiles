@@ -44,7 +44,7 @@
         "charset": "utf-8",
         "save_draft_on_force_quit": "true",
         "attachment_words": "attach",
-        "attachment_directory": "\/home\/mrb\/Downloads"
+        "attachment_directory": "~\/Downloads"
     },
     "mail": {
         "reply": {
@@ -70,7 +70,7 @@
     "thread_view": {
         "open_html_part_external": "false",
         "open_external_link": "xdg-open",
-        "default_save_directory": "\/home\/mrb\/Downloads",
+        "default_save_directory": "~\/Downloads",
         "indent_messages": "true",
         "code_prettify": {
             "enable": "true",
@@ -105,10 +105,10 @@
             "sendmail": "sendmail -i -t",
             "default": "true",
             "save_sent": "true",
-            "save_sent_to": "\/home\/mrb\/Maildir\/Sent\/cur\/",
+            "save_sent_to": "~\/Maildir\/Sent\/cur\/",
             "additional_sent_tags": "",
-            "save_drafts_to": "\/home\/mrb\/Maildir\/Drafts\/", 
-            "signature_file": "\/home\/mrb\/.signature",
+            "save_drafts_to": "~\/Maildir\/Drafts\/", 
+            "signature_file": "~\/.signature",
             "signature_default_on": "true",
             "signature_attach": "false",
             "signature_separate": "true"
