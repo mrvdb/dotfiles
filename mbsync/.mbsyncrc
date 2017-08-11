@@ -7,6 +7,7 @@
 # Other tools involved in the setup:
 # - notmuch for indexing and simple client in emacs
 # - gnus, the long term goal client in emacs
+# - astroid, gui mua on top of notmuch
 # - systemd for running mbsync periodically
 
 
@@ -19,6 +20,7 @@ CopyArrivalDate yes
 # Accounts
 IMAPAccount hsd
   Host mail.hsdev.com
+  SSLType IMAPS
   User mrb
   # Get password from my password store
   # FIXME: this ask for yubikey pin, but we do not realize it comes from mbsync
@@ -34,6 +36,7 @@ MaildirStore t510
   # Make sure we store stuff not in the main Maildir directory, so other
   # tools can make subfolders if they need to, like notmuch
   Inbox ~/Maildir/INBOX
+  # Altmap makes it easier to move messages (dont have to rename file)
   AltMap yes
   
 # Channels
