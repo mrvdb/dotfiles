@@ -1,13 +1,20 @@
 # global configuration
 [global]
 
+# 'killed' tag will be inherited by all messages in the thread
+# TODO: this could be replaced by simpler sh script
 [KillThreadsFilter]
 
+
 [myListMailsFilter]
-# This does:
-# - +tag lists for anything that has a List-Id header (this I could do with tag +lists folder:Lists (and below)
+# This does: - +tag lists for anything that has a List-Id header (this
+# I could do with tag +lists folder:Lists (and below) TODO: not sure
+# why notmuch does not have header indexing (and thus searching). If
+# it would, i could replace this by a simpler script.
 
 [SentMailsFilter]
 # This add the 'sent' tag to mails coming from my addresses as configured in notmuch
+# This is in addition to what the MUA already does
+# TODO: this is probably overkill and could be replaced by a simpler sh script
 sent_tag=sent
 
