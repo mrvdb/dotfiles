@@ -21,6 +21,7 @@ CopyArrivalDate yes
 IMAPAccount hsd
   Host mail.hsdev.com
   SSLType IMAPS
+  SSLVersions TLSv1.2
   User mrb
   # Get password from my password store
   # FIXME: this ask for yubikey pin, but we do not realize it comes from mbsync
