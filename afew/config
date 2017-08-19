@@ -1,11 +1,6 @@
 # global configuration
 [global]
 
-# 'killed' tag will be inherited by all messages in the thread
-# TODO: this could be replaced by simpler sh script
-[KillThreadsFilter]
-
-
 [myListMailsFilter]
 # This does: - +tag lists for anything that has a List-Id header (this
 # I could do with tag +lists folder:Lists (and below) TODO: not sure

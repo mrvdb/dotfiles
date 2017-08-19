@@ -20,6 +20,14 @@ $NM tag +lists folder:Lists
 # Odoo does not set its List-ID header properly
 $NM tag +lists/odoo 'folder:Lists/odoo'
 
+# Let some tags propagate
+THREAD_TAGS="muted"
+for tag in "$THREAD_TAGS"; do
+    if [ $($NM count tag:$tag) -ne 0 ]; then
+       $NM tag +$tag $($NM search --output=threads tag:$tag)
+    fi
+done
+
 # Signal astroid we're done
 if pgrep -x "astroid" > /dev/null
 then
