@@ -56,7 +56,7 @@
             "disposition": "inline"
         },
         "sent_tags": "sent",
-        "message_id_fqdn": "t510.hsdev.com",
+        "message_id_fqdn": "hsdev.com",
         "message_id_user": "mrb",
         "user_agent": "default",
         "send_delay": "0"
