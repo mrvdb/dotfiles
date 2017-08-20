@@ -7,18 +7,19 @@
 echo "Post new hook..."
 source $HOME/.config/notmuch/hooks/common
 
+# Run afew for advanced processing
+# TODO: this does just List-Id -> tag lists processing
+#       find a way to do this without afew so we can eliminate
+#       a program in the chain.
+
+echo "Running afew for advanced processing..."
+$AF --new --tag
+
 # Initial tags are already in place (see config of notmuch)
 # now do additional processing
 echo "Additional tagging..."
 $NM tag --batch --input=$HOOKS/tag/incoming
 
-# Run afew for advanced processing
-echo "Running afew for advanced processing..."
-$AF --new --tag
-# Stuff that the server thinks is a list we trust that
-$NM tag +lists folder:Lists
-# Odoo does not set its List-ID header properly
-$NM tag +lists/odoo 'folder:Lists/odoo'
 
 # Let some tags propagate
 THREAD_TAGS="muted"

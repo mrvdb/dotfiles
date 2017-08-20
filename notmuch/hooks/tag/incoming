@@ -1,3 +1,4 @@
+# -*- mode:conf -*-
 # What to do with mail that is incoming
 # Messages have just been fetched by mbsync and notmuch new has run
 # Initials tags are in place (i.e. new;unread by default)
@@ -18,4 +19,15 @@
 -new -unread -inbox            (tag:deleted or tag:spam)
 
 # Systems management log mails
-+logs folder:Projects/systeembeheer
++logs                          folder:Projects/systeembeheer
+
+
+# If mails are in folder Lists, the server thinks it's a list message
+# we follow suit
++lists                         folder:Lists
+# Odoo does not set its List-ID header properly
++lists/odoo                    folder:Lists/odoo
+
+# Make sure that emails coming from my addresses have a 'sent' tag
++sent  from:marcel@hsdev.com or from:mrb@hsdev.com or from:m@rcel.hsdev.com or from:mvanderboom@gmail.com or from:marcel@harley.nl or from:beheer@hsdev.com
+

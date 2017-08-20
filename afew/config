@@ -7,9 +7,4 @@
 # why notmuch does not have header indexing (and thus searching). If
 # it would, i could replace this by a simpler script.
 
-[SentMailsFilter]
-# This add the 'sent' tag to mails coming from my addresses as configured in notmuch
-# This is in addition to what the MUA already does
-# TODO: this is probably overkill and could be replaced by a simpler sh script
-sent_tag=sent
 
