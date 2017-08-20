@@ -17,8 +17,10 @@ Syncstate *
 # TODO: check   
 CopyArrivalDate yes
 
-# Accounts
-IMAPAccount hsd
+#
+# Stores define a collection of mailboxes
+#
+IMAPStore hsd
   Host mail.hsdev.com
   SSLType IMAPS
   SSLVersions TLSv1.2
@@ -26,10 +28,7 @@ IMAPAccount hsd
   # Get password from my password store
   # FIXME: this ask for yubikey pin, but we do not realize it comes from mbsync
   PassCmd "pass show IMAP/mail.hsdev.com"
-
-# Stores
-IMAPStore hsd
-  Account hsd
+  
 
 MaildirStore t510
   Path ~/Maildir/
@@ -39,8 +38,11 @@ MaildirStore t510
   Inbox ~/Maildir/INBOX
   # Altmap makes it easier to move messages (dont have to rename file)
   AltMap yes
-  
-# Channels
+
+#
+# Channels connect two stores for synchronisation
+#
+
 # Sync everything
 Channel hsd
   Master :hsd:
