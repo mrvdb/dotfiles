@@ -3,7 +3,12 @@
 # I'm using the alternative uid map which seems more resistant to moving than the native
 source $HOME/.config/notmuch/hooks/common
 
-# Move spam classifieds to learn
-$NM search --exclude=false --output=files \
+# Move spam classifieds to learn, they will get deleted automatically by the server
+#
+# - handle messages that have spam tag assigned
+# - do not handle messages that are in the Junk folder (for false positives)
+# - skip flagged messages
+
+$NM search --output=files \
     'tag:spam and not tag:flagged and not (folder:Junk or folder:Learn/Spam)' \
     | xargs -n1 -i{} mv -f "{}" $MAILDIR/Learn/Spam/cur/
