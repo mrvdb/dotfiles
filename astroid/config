@@ -1,7 +1,7 @@
 {
     "astroid": {
         "config": {
-            "version": "8"
+            "version": "9"
         },
         "notmuch_config": "\/home\/mrb\/.notmuch-config",
         "debug": {
@@ -107,11 +107,12 @@
             "save_sent": "true",
             "save_sent_to": "~\/Maildir\/Sent\/cur\/",
             "additional_sent_tags": "",
-            "save_drafts_to": "~\/Maildir\/Drafts\/", 
+            "save_drafts_to": "~\/Maildir\/Drafts\/",
             "signature_file": "~\/.signature",
             "signature_default_on": "true",
             "signature_attach": "false",
-            "signature_separate": "true"
+            "signature_separate": "true",
+            "select_query": ""
         }
     },
     "startup": {
