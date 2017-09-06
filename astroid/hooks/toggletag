@@ -1,10 +1,10 @@
 #!/bin/bash
 
 #
-# %1 : tag
-# %2 : 'thread' or 'id'
-# %3 : when viewing a thread: thread_id
-#      when viewing a message: message id
+# $1   : tag
+# $2   : 'thread:<ID> or 'id:<ID>'
+# <ID> : when viewing a thread: thread id
+#        when viewing a message: message id
 
 
 
