@@ -31,18 +31,14 @@ hide_edge_borders none
 # Make the reset of urgency hint explicit
 force_display_urgency_hint 500 ms
 
-
-#
 # Workspace configuration
 #
-# Give workspace names through variables
-set $wsmulti   Multi
+# Give workspaces we use for specific purposes,
+# i.e. put windows on them automatically or through some key shortcut,
+# names through variables
 set $wsdefault Default
-set $wsweb     Web
-set $wsedit    Edit
 set $wssystem  System
 set $wsmail    Mail
-set $wscontact Contact
 set $wsmedia   Media
 set $wsreading Reading
 
@@ -51,8 +47,6 @@ workspace_layout default
 # Sure, automatic back and forth sounds nice
 workspace_auto_back_and_forth yes
 
-
-#
 # Key binding configuration
 #
 # Give consistent key modifiers
@@ -66,7 +60,6 @@ set $Ctrl  Control
 # start a terminal, so we *do* bind that one.
 bindsym $Cmd+Return exec i3-sensible-terminal
 
-#
 # MOVING FOCUS...
 # ...of a window/container
 #
@@ -86,20 +79,6 @@ bindsym $Cmd+p focus parent
 # ...to set of tileing or set of floating
 bindsym $Cmd+space focus mode_toggle
 
-# ...to to specific workspace
-bindsym $Cmd+1 workspace $wsdefault
-bindsym $Cmd+2 workspace $wsweb
-bindsym $Cmd+3 workspace $wsedit
-bindsym $Cmd+4 workspace $wssystem
-bindsym $Cmd+5 workspace $wsmail
-bindsym $Cmd+6 workspace $wscontact
-bindsym $Cmd+7 workspace $wsmedia
-bindsym $Cmd+8 workspace 8
-bindsym $Cmd+9 workspace 9
-bindsym $Cmd+0 workspace $wsmulti
-
-
-#
 # MOVING CONTAINERS
 #
 # ...basic left/right/up/down
@@ -109,22 +88,11 @@ bindsym $Cmd+$Shift+Up move up
 bindsym $Cmd+$Shift+Right move right
 # ...to next workspace
 bindsym $Cmd+$Shift+Tab mark _moving; move container to workspace next; [con_mark="_moving"] focus; unmark _moving
-# ...to specific workspace
-bindsym $Cmd+$Shift+1 move container to workspace $wsdefault
-bindsym $Cmd+$Shift+2 move container to workspace $wsweb
-bindsym $Cmd+$Shift+3 move container to workspace $wsedit
-bindsym $Cmd+$Shift+4 move container to workspace $wssystem
-bindsym $Cmd+$Shift+5 move container to workspace $wsmail
-bindsym $Cmd+$Shift+6 move container to workspace $wscontact
-bindsym $Cmd+$Shift+7 move container to workspace $wsmedia
-bindsym $Cmd+$Shift+8 move container to workspace 8
-bindsym $Cmd+$Shift+9 move container to workspace 9
-bindsym $Cmd+$Shift+0 move container to workspace $wsmulti
 # ...to last split position (WARNING: only in gitversion)
 bindsym $Cmd+$Shift+m move window to mark lastsplit, unmark lastsplit
 # ...to back and forth position and follow it
 bindsym $Cmd+$Shift+i move container to workspace back_and_forth; workspace back_and_forth
-#
+
 # CHANGING LAYOUT
 #
 # ...to horizontal split
@@ -145,7 +113,6 @@ bindsym $Cmd+w kill
 bindsym $Cmd+$Ctrl+space floating toggle
 
 
-#
 # MAKE I3
 #
 # ... reload the config file
@@ -155,8 +122,7 @@ bindsym $Cmd+Control+r restart
 # ... quit
 bindsym $Cmd+Control+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-#
-# Mouse binding configuration
+# MOUSE configuration
 #
 # Give consistent mouse button nameing
 set $LeftBtn   button1
@@ -175,7 +141,6 @@ floating_modifier $Cmd
 bindsym $WheelUp nop
 bindsym $WheelDown nop
 
-#
 # Scratchpad configuration
 #
 bindsym $Cmd+$Shift+minus move scratchpad
