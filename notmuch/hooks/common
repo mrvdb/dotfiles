@@ -10,3 +10,19 @@ AF=/usr/bin/afew
 # Variables
 HOOKS=$HOME/.config/notmuch/hooks
 MAILDIR=/media/data/mail
+NOTIFY_LAST="$HOOKS/.NM_LASTNOTIFIED_REV"
+
+# Get the current database revision
+function nm_get_dbrevision() {
+    echo `$NM count --lastmod | awk '{print $3}'`
+}
+
+function nm_get_lastnotifiedrev() {
+    if [ -e $NOTIFY_LAST ]; then
+	echo `cat $NOTIFY_LAST`
+    fi
+}
+
+function nm_set_lastnotifiedrev() {
+    echo $1 > "$NOTIFY_LAST"
+}

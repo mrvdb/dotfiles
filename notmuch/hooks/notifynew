@@ -1,13 +1,24 @@
 #!/bin/sh
-# Adapted from some script on github, forgot which one exactly
-# What to notify
-Q="query:notify"
+# Get our common stuff
+source $HOME/.config/notmuch/hooks/common
+
+# Read current database revision
+CUR_REV=`nm_get_dbrevision`
+LAST_REV=`nm_get_lastnotifiedrev`
+
+# What to notify, the prefined query shows the max. available messages, not
+# counting the last time we notified, so it just has a list of things
+# we didn't handle yet in the MUA
+Q="query:notify and lastmod:$LAST_REV..$CUR_REV"
+
+# How many entries maximum?
 N=5
+
 ICON='/usr/share/icons/Faenza/apps/48/internet-mail.png'
-NM=/usr/local/bin/notmuch
 
 # the sort order of subjects
 SORT="newest-first"
+
 
 # have notmuch count the number of messages in the search
 CNT=$($NM count --output=messages "$Q")
@@ -22,5 +33,8 @@ if [ "$CNT" -gt 0 ]; then
 
   notify-send -i "$ICON" "$CNT unread mesages." "$HTML_SUBS"
 fi
+
+# Save the revision of the database, so we can use it next time
+nm_set_lastnotifiedrev $CUR_REV
 
 exit 0
