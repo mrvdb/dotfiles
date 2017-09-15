@@ -25,7 +25,7 @@ $NM tag --batch --input=$HOOKS/tag/incoming
 THREAD_TAGS="muted"
 for tag in "$THREAD_TAGS"; do
     if [ $($NM count tag:$tag) -ne 0 ]; then
-       $NM tag +$tag $($NM search --output=threads tag:$tag)
+       $NM tag +$tag -new $($NM search --output=threads tag:$tag)
     fi
 done
 

@@ -1,7 +1,7 @@
 # -*- mode:conf -*-
 # What to do with mail that is incoming
 # Messages have just been fetched by mbsync and notmuch new has run
-# Initials tags are in place (i.e. new;unread by default)
+# Initial tags are in place (i.e. new;unread by default)
 # Basically we want to replicate sieve here, if not already taken care
 # of automatically.
 
@@ -19,7 +19,7 @@
 -new -unread -inbox            (tag:deleted or tag:spam)
 
 # Systems management log mails
-+logs                          folder:Projects/systeembeheer
++logs -new folder:Projects/systeembeheer
 
 
 # If mails are in folder Lists, the server thinks it's a list message
@@ -29,5 +29,9 @@
 +lists/odoo                    folder:Lists/odoo
 
 # Make sure that emails coming from my addresses have a 'sent' tag
-+sent  from:marcel@hsdev.com or from:mrb@hsdev.com or from:m@rcel.hsdev.com or from:mvanderboom@gmail.com or from:marcel@harley.nl or from:beheer@hsdev.com
++sent -new from:marcel@hsdev.com or from:mrb@hsdev.com or from:m@rcel.hsdev.com or from:mvanderboom@gmail.com or from:marcel@harley.nl or from:beheer@hsdev.com
 
+# When things have gotten tags from us, they are not new anymore
+-new  is:flagged
+-new  is:replied
+-new  is:passed
