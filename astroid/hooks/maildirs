@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Where are the Maildir folders
+MDIR=~/Maildir
+
+# Ignore some stuff
+IGNORES='cur|new|tmp|num|nov|marks|.nnmaildir|.notmuch'
+
+# Local situations my need specific arguments to find
+FINDARGS='-L'
+
+# Show list of maildir folders
+find $FINDARGS $MDIR -type d  | \
+    grep -Ev $IGNORES | \
+    sed "s+${MDIR}++" | \
+    sed 's+^/++'      | \
+    sed '/^\s*$/d'

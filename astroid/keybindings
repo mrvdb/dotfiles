@@ -19,6 +19,8 @@ main_window.search=/			# Search, default: o
 # X     : key combo to bind this to
 # Toggle 'deleted' tag
 thread_index.run(hooks::toggletag deleted thread:%1)=Delete 
+thread_index.run(hooks::refile %1)=\
+
 
 thread_index.refine_query=C-/		# Refine query, default: O
 thread_index.duplicate_refine_query=M-/	# Duplicate and refine query, default: C-v
@@ -51,6 +53,9 @@ thread_index.unread=u			# Toggle 'unread' tag on thread, default: N
 thread_view.run(hooks::toggletag deleted id:%2)=Delete
 # Toggle 'spam' tag
 thread_view.run(hooks::toggletag spam id:%2)=s         
+
+# Refile a single message into a mailfolder
+thread_view.run(hooks::refile %1 %2)=\
 
 thread_view.up=C-p			# Scroll up or move focus to previous element, default: k
 thread_view.down=C-n			# Scroll down or move focus to next element, default: j

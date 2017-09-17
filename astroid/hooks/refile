@@ -1,0 +1,83 @@
+#!/bin/bash
+# Bash is needed for some constructs which we should probably rewrite
+# at some point
+
+NM=notmuch
+MAILDIR=~/Maildir
+
+function error() {
+    zenity --error --text="$1"
+}
+
+# Script to refile a message to another Maildir folder
+# $1 : thread id, always present
+# $2 : msg id, only present if called from thread_view
+
+# Expected behaviour:
+# - If only $1 is present, file the whole thread into a Maildir folder
+# - If both are present, assume we're on a message and refile only that
+#
+
+# TODO: before thread refiling is activated we need to think about 'Sent' items
+#       chances are we do not want to refile the Sent messages, as for the longest
+#       time we've only been refiling messages from others to their containers and
+#       gathered all other messages in Sent/YYYY folders.
+# TODO: support folder spec as $3 ?
+# TODO: allow refiling to non-existing folders?
+# 
+# Process cmdline args
+case $# in
+    2)
+	# Both thread and message id
+	msg_id=$2
+	# Fallthrough
+	;&
+    1)
+	# Just the thread id
+	thr_id=$1
+	;;
+    *)
+	error "Got $# arguments. Refile takes 1 or 2 arguments (thread_id and optional message_id)"
+	exit 1
+esac
+
+# Ask user for the maildir to file into
+dest=`maildirs | sort -u | dmenu -i -p Maildir:`
+if [[ ! -d $MAILDIR/$dest ]]; then
+    # Folder does not exist
+    error "Maildir folder '$dest' does not exist"
+    exit 1
+fi
+if [[ -z $dest ]]; then
+    # Escape pressed in selection
+    exit 1
+fi
+
+# We're good to go
+
+# Refile a single message, as in, hook called from thread_view
+if [[ $msg_id ]]; then
+    # Do message refile only
+    # zenity --info --text="Implement message refiling '$msg_id' to '$dest'"
+    # Searching for a message id either produces nothing or 1 message.
+    $NM search --output=files "id:$msg_id" | xargs -I{} mv {} $MAILDIR/$dest/cur
+
+    # Should we update the nm index here? run mbsync? seems costly.
+    # - mbsync hsd:$dest syncs the destination mailbox only, which is quite fast I guess
+    # - how to get the source mailbox?
+    # - running notmuch is less pressing, as the contents of the messages have not changed and the location is not that relevant on
+    #   short term.
+    exit 0
+fi
+
+# Refile a whole thread id, as in, hook called from thread_index
+if [[ $thr_id ]]; then
+    # Refile all messages in thread
+    zenity --info --text="Implement thread refiling '$thr_id' to '$dest'"
+    $NM search --output=files "thread:$thr_id" | zenity --list --checklist --text "About to refile to '$dest'" --column " " --column "Files"
+
+    # Should we update the index here? run mbsync? seems coslty
+    exit 0
+fi
+
+
