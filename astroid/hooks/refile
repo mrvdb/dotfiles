@@ -60,13 +60,15 @@ if [[ $msg_id ]]; then
     # Do message refile only
     # zenity --info --text="Implement message refiling '$msg_id' to '$dest'"
     # Searching for a message id either produces nothing or 1 message.
-    $NM search --output=files "id:$msg_id" | xargs -I{} mv {} $MAILDIR/$dest/cur
+    $NM search --output=files "id:$msg_id" | xargs -I{} mv {} "$MAILDIR/$dest/cur"
 
-    # Should we update the nm index here? run mbsync? seems costly.
-    # - mbsync hsd:$dest syncs the destination mailbox only, which is quite fast I guess
+    # Syncing the destination mailbox is easy (should we do that here?)
     # - how to get the source mailbox?
-    # - running notmuch is less pressing, as the contents of the messages have not changed and the location is not that relevant on
-    #   short term.
+    # mbsync hsd:$dest hsd:$source
+    
+    # - running notmuch new for the mailbox is less pressing, as the contents of the
+    #   messages have not changed and the location is not that
+    #   relevant on short term.
     exit 0
 fi
 
