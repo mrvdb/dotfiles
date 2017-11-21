@@ -75,13 +75,11 @@
 ;; mail
 (xbindkey '(Mod4 m)      "startmail")
 ;; browser
-(xbindkey '(Mod4 b)      "chromium")
+(xbindkey '(Mod4 b)      "xdg-open about:blank")
 ;; calculator
 (xbindkey '(Mod4 l)      "calc")
 ;; terminal
 (xbindkey '(Mod4 Return) "xterm")
-;; openerp v5
-(xbindkey '(Mod4 o)      "openerp-client")
 ;; file manager
 (xbindkey '(Mod4 y)      "pcmanfm --no-desktop")
 ;; telegram
