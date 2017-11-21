@@ -1,7 +1,3 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Start of xbindkeys guile configuration ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 ;; This document was written with the external keyboard of a thinkpad
 ;; The key assignments are keyboard dependent; over time I will mark
 ;; each note for which keyboard that was written, so the text is not
@@ -32,7 +28,7 @@
 (xbindkey '(Mod5 F6) "/etc/acpi/togglebluetooth.sh")
 
 ;; Fn-F7   : cycle through display modes on all monitors (requires acpi trickery!!)
-(xbindkey '(XF86Display) "disper --cycle-stages='-S:-s' --cycle")
+;;(xbindkey '(XF86Display) "disper --cycle-stages='-S:-s' --cycle")
 
 ;; Fn-F8   : toggle screen-expand / ultranav (XF86TouchpadjjToggle)
 ;; Fn-F9   : nothing, not detected
@@ -97,9 +93,7 @@
 ;; Ctrl Space:     emacs set the mark       (probably keep it that way)
 (xbindkey '(Control Shift space) "capture-todo.sh")
 (xbindkey '(Control Alt   space) "capture-buy.sh" )
-;;(xbindkey '(Alt       space) "capture-dent.sh")
-(xbindkey '(Alt Mod4  space) "capture-pump.sh")
-(xbindkey '(Alt Shift space) "capture-tweet.sh")
+(xbindkey '(Alt Shift space)     "capture-tweet.sh")
 
 ;; Global new mail
 ;; FIXME: this hides some Emacs shortcuts ending in Ctrl-M
