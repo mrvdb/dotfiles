@@ -18,7 +18,7 @@ main_window.search=/			# Search, default: o
 # %1    : thread id
 # X     : key combo to bind this to
 # Toggle 'deleted' tag
-thread_index.run(hooks::toggletag deleted thread:%1)=Delete 
+thread_index.run(hooks::toggletag deleted thread:%1)=d 
 thread_index.run(hooks::refile %1)=\
 
 
@@ -50,7 +50,7 @@ thread_index.unread=u			# Toggle 'unread' tag on thread, default: N
 
 # Toggle for 'deleted' tag
 # TODO: I want this on 'k' or 'd' instead of the two-finger combo Fn-Del
-thread_view.run(hooks::toggletag deleted id:%2)=Delete
+thread_view.run(hooks::toggletag deleted id:%2)=d
 # Toggle 'spam' tag
 thread_view.run(hooks::toggletag spam id:%2)=s         
 
@@ -96,7 +96,7 @@ searches.save=C-s			# Save recent query as saved search, default: s
 # REFERENCE BELOW
 
 # edit_message.cancel=C-c										# Cancel sending message (unreliable), default: C-c
-# edit_message.delete_draft=D									# Delete draft, default: D
+edit_message.delete_draft=D									# Delete draft, default: D
 # edit_message.edit=Return								# Edit message in editor, default: Key (GDK_KEY_Return), Key (GDK_KEY_KP_Enter)
 # edit_messsage.attach_mids=A									# Attach messages by mids, default: A
 # help.page_down=J										# Page down, default: J, Key (GDK_KEY_Page_Down)
@@ -191,8 +191,8 @@ searches.save=C-s			# Save recent query as saved search, default: s
 # thread_view.archive_then_next_unread=				# Alias for thread_view.multi_next_thread.archive_next_unread, no defaults.
 # thread_view.archive_thread=a					# Toggle 'inbox' tag on the whole thread, default: a
 # thread_view.compose_to_sender=c				# Compose a new message to the sender of the message (or receiver if sender is you), default: c
-# thread_view.delete_attachment=d				# Delete attachment (if editing), default: d
-# thread_view.delete_draft=D					# Delete currently focused draft, default: D
+thread_view.delete_attachment=D 				# Delete attachment (if editing), default: d
+thread_view.delete_draft=					# Delete currently focused draft, default: D
 # thread_view.edit_draft=E					# Edit currently focused message as new or draft, default: E
 # thread_view.end=0						# Scroll to end, default: 0, Key (GDK_KEY_End)
 # thread_view.expand=e						# Toggle expand, default: e
