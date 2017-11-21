@@ -1,7 +1,7 @@
 {
     "astroid": {
         "config": {
-            "version": "9"
+            "version": "10"
         },
         "notmuch_config": "\/home\/mrb\/.notmuch-config",
         "debug": {
@@ -39,12 +39,13 @@
         }
     },
     "editor": {
-        "cmd": "emacsclient --quiet --create-frame --parent-id %3 %1",
-        "external_editor": "false",
+        "cmd": "emacsclient --quiet --create-frame  %1",
+        "external_editor": "true",
         "charset": "utf-8",
         "save_draft_on_force_quit": "true",
         "attachment_words": "attach",
-        "attachment_directory": "~\/Downloads"
+        "attachment_directory": "~\/Downloads",
+        "markdown_processor": "marked"
     },
     "mail": {
         "reply": {
@@ -81,7 +82,7 @@
         "gravatar": {
             "enable": "true"
         },
-        "mark_unread_delay": "0.5",
+        "mark_unread_delay": "0.3",
         "expand_flagged": "true"
     },
     "crypto": {
@@ -112,7 +113,8 @@
             "signature_default_on": "true",
             "signature_attach": "false",
             "signature_separate": "true",
-            "select_query": ""
+            "select_query": "",
+            "signature_file_markdown": ""
         }
     },
     "startup": {
